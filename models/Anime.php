@@ -3,10 +3,11 @@
 class Anime{
     private ?int $id;
 
-    public function __construct(private string $name, private string $synopsis, private Categories $categories_id, private int $poster)
+    public function __construct(private string $name, private string $synopsis_id, private Categories $categories_id, private media $poster, private string $studio, private string $comments)
     {
-        
+
     }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -27,14 +28,14 @@ class Anime{
         $this->name = $name;
     }
 
-    public function getSynopsis(): string
+    public function getSynopsisId(): string
     {
-        return $this->synopsis;
+        return $this->synopsis_id;
     }
 
-    public function setSynopsis(string $synopsis): void
+    public function setSynopsisId(string $synopsis_id): void
     {
-        $this->synopsis = $synopsis;
+        $this->synopsis_id = $synopsis_id;
     }
 
     public function getCategoriesId(): Categories
@@ -47,13 +48,33 @@ class Anime{
         $this->categories_id = $categories_id;
     }
 
-    public function getPoster(): int
+    public function getPoster(): Media
     {
         return $this->poster;
     }
 
-    public function setPoster(int $poster): void
+    public function setPoster(Media $poster): void
     {
         $this->poster = $poster;
+    }
+
+    public function getStudioId(): string
+    {
+        return $this->studio;
+    }
+
+    public function setStudioId(string $studio): void
+    {
+        $this->studio = $studio;
+    }
+
+    public function getComments(): string
+    {
+        return $this->comments;
+    }
+
+    public function setComments(string $comments): void
+    {
+        $this->comments = $comments;
     }
 }

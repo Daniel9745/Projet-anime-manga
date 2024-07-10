@@ -3,7 +3,7 @@
 class Comments{
     private ?int $id;
 
-    public function __construct(private string $content, private User $user_id, private Categories $categories_id)
+    public function __construct(private string $content, private User $user_id, private Categories $categories_id, private DateTime $created_at)
     {
         
     }
@@ -45,5 +45,15 @@ class Comments{
     public function setCategoriesId(Categories $categories_id): void
     {
         $this->categories_id = $categories_id;
+    }
+
+    public function getCreatedAt(): DateTime
+    {
+        return $this->created_at;
+    }
+
+    public function setCreatedAt(DateTime $created_at): void
+    {
+        $this->created_at = $created_at;
     }
 }

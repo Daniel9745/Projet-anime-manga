@@ -3,10 +3,11 @@
 class Manga{
     private ? int $id;
 
-    public function __construct(private string $name, private Media $volume_cover, private string $comment, private Author $author_id, private Studio $studio_id, private int $page_count, private DateTime $date_of_publication)
+    public function __construct(private string $name, private Media $volume_cover, private string $comment, private Author $author_id, private string $publisher, private int $page_count, private DateTime $date_of_publication)
     {
         
     }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -57,14 +58,14 @@ class Manga{
         $this->author_id = $author_id;
     }
 
-    public function getStudioId(): Studio
+    public function getPublisher(): string
     {
-        return $this->studio_id;
+        return $this->publisher;
     }
 
-    public function setStudioId(Studio $studio_id): void
+    public function setPublisher(string $publisher): void
     {
-        $this->studio_id = $studio_id;
+        $this->publisher = $publisher;
     }
 
     public function getPageCount(): int

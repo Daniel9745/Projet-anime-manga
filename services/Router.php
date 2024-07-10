@@ -22,5 +22,11 @@ class Router
         {
             echo "<h1>Je suis une page manga</h1>";
         }
+        else if(isset($get["route"]) && $get["route"] === "inscription"){
+            echo"<h1>Je suis une page inscription</h1>";
+        }
+        else if(isset($get["route"]) && $get["route"] === "connexion"){
+            echo"<h1>Je suis une page connexion</h1>";
+        }
     }
 }
