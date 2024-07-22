@@ -1,0 +1,9 @@
+{% extends "layout.html.twig" %}
+
+{% block main %}
+    <h1>Je suis une page liste de manga</h1>
+    <ul>
+    <for manga in mangaList>
+        <li>test: {{ manga.name }}</li>
+    </ul>
+{% endblock %}

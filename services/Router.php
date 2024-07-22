@@ -7,26 +7,49 @@
 
 class Router
 {
+    private DefaultController $dc;
+    private AnimeController $ac;
+    private MangaController $mc;
+    private UploadController $uc;
+
     public function handleRequest(array $get) : void
     {
+        $this->dc = new DefaultController();
+        $this->ac = new AnimeController();
+        $this->mc = new MangaController();
+        $this->uc = new UploadController();
+
+        
 
         if(!isset($get["route"]))
         {
-            // $dc->home();
+            $this->dc->home();
         }
         else if(isset($get["route"]) && $get["route"] === "anime")
         {
-            echo"<h1>Je suis une page anime</h1>";
+            $this->ac->ShowAnime();
+        }
+        else if(isset($get["route"]) && $get["route"] === "anime_id")
+        {
+            $this->ac->ShowAnimeById();
         }
         else if(isset($get["route"]) && $get["route"] === "manga")
         {
-            echo "<h1>Je suis une page manga</h1>";
+            $this->mc->ShowMangaList();
+        }
+        else if(isset($get["route"]) && $get["route"] === "manga_id")
+        {
+            $this->mc->ShowMangaById();
         }
         else if(isset($get["route"]) && $get["route"] === "inscription"){
-            echo"<h1>Je suis une page inscription</h1>";
+            $this->dc->register();
         }
         else if(isset($get["route"]) && $get["route"] === "connexion"){
-            echo"<h1>Je suis une page connexion</h1>";
+            $this->dc->login();
         }
+        else if(isset($get["route"]) && $get["route"] === "upload"){
+            $this->uc->upload();
+        }
+
     }
 }

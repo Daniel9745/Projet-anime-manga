@@ -1,0 +1,10 @@
+{% extends "layout.html.twig" %}
+
+{% block main %}
+    <h1>Je suis une page liste d'animes</h1>
+    <ul>
+    {% for anime in animeList %}
+        <li>{{ anime.name }}</li>
+    {% endfor %}
+    </ul>
+{% endblock %}
