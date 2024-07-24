@@ -1,0 +1,92 @@
+body {
+    background-image: url(../../../uploads/anime-landscape-blossom-canal-sakura-water-1021321.jpeg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: top center;
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    max-width: 1450px;
+    margin: auto;
+    padding: 20px;
+}
+
+.header {
+    background-color: #FF94A9;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 10px 20px;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbar ul {
+    display: flex;
+    padding: 0;
+    margin: 0;
+}
+
+.navbar li {
+    list-style: none;
+    margin: 0 15px;
+}
+
+.navbar a {
+    text-decoration: none;
+    background-color: #EF82B9;
+    padding: 10px 20px;
+    color: white;
+    border-radius: 5px;
+}
+
+.navbar a:hover {
+    background-color: white;
+    color: #EF82B9;
+}
+
+.search {
+    border-radius: 30px;
+    height: 30px;
+    width: 400px;
+    margin: 10px 0;
+    padding: 0 10px;
+    align-self: flex-end;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 50px;
+    margin-top: 20px;
+}
+
+.card {
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.5);
+    padding: 10px;
+    background-color: white;
+    text-align: center;
+    border-radius: 10px;
+}
+
+.card img {
+    max-width: 100%;
+    border-radius: 10px;
+}
+
+.card a {
+    display: block;
+    margin-top: 10px;
+    text-decoration: none;
+    color: #333;
+}
+
+.card a:hover {
+    color: #EF82B9;
+}
