@@ -7,13 +7,17 @@ class MangaController extends AbstractController{
     }
 
     public function ShowMangaById(){
-        return $this->render("manga.html.twig", []);
+        $mm = new MangaManager();
+        
+        $mangas= $mm->findOne(intval($mangaId));
+        return $this->render("manga.html.twig", ["mangaId" => $mangaId]);
     }
-
+    
     public function ShowMangaList(){
-
-        $mangaMangager = new MangaManager();
-        $mangas = $mangaMangager->findAll();
-        return $this->render("mangas.html.twig", ['manga' => $mangas]);
+        $mm = new MangaManager();
+        
+        $mangaList= $mm->findAll();
+        return $this->render("mangas.html.twig", ["mangaList" => $mangaList]);
+        
     }
 }

@@ -1,0 +1,179 @@
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  font-size: 1.6rem;
+}
+
+.container {
+  margin: auto;
+  padding: 30px;
+}
+
+body {
+  background-image: url(../../../uploads/anime-landscape-blossom-canal-sakura-water-1021321.jpeg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 100%;
+  margin: 0;
+}
+
+.card {
+  box-shadow: 0, 1px, 5px rgba(0, 0, 0, 0.5);
+}
+
+li, .header .navbar {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+.header {
+  background-color: #FF94A9;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  padding: 10px 20px;
+}
+.header .navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.header .navbar a {
+  color: black;
+  background-color: #EF82B9;
+  padding: 1rem;
+}
+.header .navbar a:hover {
+  background-color: white;
+  color: black;
+}
+.header .navbar ul {
+  display: none;
+  padding: 0;
+  margin: 0 15rem;
+}
+.header .navbar ul li, .header .navbar ul .navbar {
+  list-style: none;
+  margin: 0 1.5rem;
+}
+.header .search {
+  border-radius: 3rem;
+  height: 20px;
+  width: 60%;
+  margin: 1rem 0;
+  padding: 0 1rem;
+  align-self: center;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: 50px;
+  margin-top: 20px;
+}
+
+.pagination ul {
+  display: flex;
+  justify-content: center;
+  padding-top: 1.5rem;
+}
+.pagination ul li, .pagination ul .header .navbar, .header .pagination ul .navbar {
+  margin: 1rem;
+}
+.pagination a {
+  color: black;
+  background-color: white;
+  padding: 1rem;
+}
+
+.card {
+  padding: 1.5rem;
+  background-color: rgba(220, 82, 180, 0.4);
+  text-align: center;
+  border-radius: 2rem;
+}
+.card img {
+  width: 50%;
+}
+.card a {
+  display: block;
+  margin-top: 1rem;
+  text-decoration: none;
+  color: black;
+  background-color: #EF82B9;
+  border-radius: 2rem;
+  padding: 1rem 0;
+}
+.card a:hover {
+  background-color: white;
+  color: black;
+}
+.card .img {
+  max-width: 100%;
+  border-radius: 1rem;
+}
+
+@media screen and (min-width: 980px) {
+  .header {
+    background-color: #FF94A9;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    padding: 10px 20px;
+  }
+  .header .navbar {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  }
+  .header .navbar ul {
+    display: flex;
+  }
+  .header .search {
+    border-radius: 3rem;
+    height: 30px;
+    width: 400px;
+    margin: 1rem 0;
+    padding: 0 1rem;
+    align-self: flex-end;
+  }
+  .container {
+    max-width: 1350px;
+  }
+  .fa-bars {
+    display: none;
+  }
+  .grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+@media screen and (min-width: 768px) and (max-width: 980px) {
+  .header .navbar {
+    display: flex;
+    flex-direction: column;
+  }
+  .header .navbar ul {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin-bottom: 2rem;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 50px;
+    margin-top: 20px;
+  }
+  .fa-bars {
+    display: none;
+  }
+}/*# sourceMappingURL=header.css.map */

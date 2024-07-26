@@ -2,4 +2,16 @@
 
 {% block main %}
     <h1>Je suis une page de manga</h1>
+    
+    <ul>
+    {% for manga in mangaList %}
+        <li>nom de manga: {{ manga.name }}</li>
+        <li>Synopsis: {{ manga.synopsisId.content }}</li>
+        <li>Auteur : {{ manga.authorId.name}}</li>
+        <li>Editeur: {{manga.publisher}}</li>
+        <li><img src="{{manga.volumeCover.url}}" alt="{{manga.volume_cover.alt}}"/></li>
+        <li>Nombre de page: {{ manga.pageCount}}</li>
+        <li>Date de parution: {{manga.dateOfPublication.format('d/m/y')}} </li>
+    {% endfor %}
+    </ul>
 {% endblock %}

@@ -4,7 +4,7 @@ class Manga
 {
     private ?int $id;
 
-    public function __construct(private string $name, private Synopsis $synopsis_id, private Author $author_id, private string $publisher, private Media $volume_cover, private string $comments_id, private int $page_count, private DateTime $date_of_publication)
+    public function __construct(private string $name, private Synopsis $synopsis_id, private Author $author_id, private string $publisher, private Media $volume_cover, private ? string $comments_id, private int $page_count, private DateTime $date_of_publication)
     {
     }
 

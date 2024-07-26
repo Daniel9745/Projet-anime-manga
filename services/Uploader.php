@@ -7,7 +7,7 @@
 class Uploader {
 
     private array $extensions = ["jpeg","jpg","png", "pdf"];
-    private string $uploadFolder = "uploads";
+    private string $uploadFolder = "cover";
     private RandomStringGenerator $gen;
 
     public function __construct()
@@ -23,11 +23,12 @@ class Uploader {
     public function upload(array $files, string $uploadField, string $description) : ?Media
     {   
         
-        if(isset($files[$uploadField]) && isset($_POST['description'])){
+        if(isset($files[$uploadField]) && isset($_POST['description']) && isset($_POST['name'])){
             try {
                 $file_name = $files[$uploadField]['name'];
                 $file_tmp =$files[$uploadField]['tmp_name'];
                 $description = $_POST['description'];
+                $name = $_POST['name'];
 
                 $tabFileName = explode('.',$file_name);
                 $file_ext=strtolower(end($tabFileName));
@@ -41,7 +42,7 @@ class Uploader {
                 {
                     $url = $this->uploadFolder."/".$newFileName.".".$file_ext;
                     move_uploaded_file($file_tmp, $url);
-                    return new Media($file_name, $url, $description);
+                    return new Media($name, $url, $description);
                 }
             }
             catch(Exception $e)

@@ -2,8 +2,11 @@
 
 {% block main %}
     <h1>Je suis une page liste de manga</h1>
+    
     <ul>
-    <for manga in mangaList>
-        <li>test: {{ manga.name }}</li>
+    {% for manga in mangaList %}
+
+        <li><img src="{{manga.volumeCover.url}}" alt="{{manga.volume_cover.alt}}"/><a href="#">nom de manga: {{ manga.name }}</a></li>
+    {% endfor %}
     </ul>
 {% endblock %}

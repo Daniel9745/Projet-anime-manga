@@ -3,7 +3,7 @@
 class Comments{
     private ?int $id;
 
-    public function __construct(private string $content, private User $user_id, private Categories $categories_id, private DateTime $created_at)
+    public function __construct(private string $content, private User $user_id, private Categories $categories_id, private DateTime $created_at = new DateTime())
     {
         
     }
