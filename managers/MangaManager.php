@@ -1,21 +1,25 @@
 <?php
 
-class MangaManager extends AbstractManager{
+class MangaManager extends AbstractManager
+{
 
     public function __construct()
     {
         parent::__construct();
     }
-    public function findOne(int $id){
+    public function findOne(int $id)
+    {
         $am = new AuthorManager();
-        $query=$this->db->prepare('SELECT * FROM manga WHERE id = :id');
+        $query = $this->db->prepare("SELECT manga.*, synopsis.content, media.name, media.url, media.alt FROM manga
+        JOIN media ON media.id = manga.volume_cover
+        JOIN synopsis ON manga.synopsis_id =synopsis.id WHERE manga.id = :id");
         $parameters = [
             "id" => $id
         ];
         $query->execute($parameters);
         $result = $query->fetch(PDO::FETCH_ASSOC);
 
-        if($result){
+        if ($result) {
             $media = new Media($result["name"], $result["url"], $result["alt"]);
             $synopsis = new Synopsis($result["content"]);
             $author = $am->findAuthor($result["author_id"]);
@@ -28,7 +32,8 @@ class MangaManager extends AbstractManager{
         return null;
     }
 
-    public function findAll(): array{
+    public function findAll(): array
+    {
 
         $am = new AuthorManager();
         $query = $this->db->prepare("SELECT manga.*, synopsis.content, media.name, media.url, media.alt FROM manga
@@ -38,7 +43,7 @@ class MangaManager extends AbstractManager{
         $result = $query->fetchAll(PDO::FETCH_ASSOC);
         $mangaList = [];
 
-        foreach($result as $item){
+        foreach ($result as $item) {
 
             $media = new Media($item["name"], $item["url"], $item["alt"]);
             $synopsis = new Synopsis($item["content"]);
@@ -49,7 +54,7 @@ class MangaManager extends AbstractManager{
             $manga->setId($item["id"]);
             $mangaList[] = $manga;
         }
-        dump($mangaList);
+        // dump($mangaList);
         return $mangaList;
     }
 }

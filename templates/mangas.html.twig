@@ -1,12 +1,12 @@
-{% extends "layout.html.twig" %}
+{% extends "front/layout.html.twig" %}
 
 {% block main %}
+<input type="search" class="search">
     <h1>Je suis une page liste de manga</h1>
     
-    <ul>
+    <ul class="grid">
     {% for manga in mangaList %}
-
-        <li><img src="{{manga.volumeCover.url}}" alt="{{manga.volume_cover.alt}}"/><a href="#">nom de manga: {{ manga.name }}</a></li>
+        <li class="card"><img src="{{manga.volumeCover.url}}" alt="{{manga.volumeCover.alt}}"/><a href="index.php?route=manga_id&id={{ manga.id }}">{{ manga.name }}</a></li>
     {% endfor %}
     </ul>
 {% endblock %}

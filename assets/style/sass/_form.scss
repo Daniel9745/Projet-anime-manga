@@ -1,0 +1,35 @@
+h1 {
+
+    color: white;
+}
+// .upload{
+//     background-color: rgba(255, 255, 255, 0.7);
+//     border: solid 5px black;
+// }
+.form {
+    display: flex;
+    flex-direction: column;
+    // border: red solid 14px;
+    background-color: rgba(239, 130, 185, 0.8);
+    padding: 30px;
+    border-radius: 20px 0;
+
+
+    fieldset {
+        background-color: rgba(255, 255, 255, 0.5);
+        margin-bottom: 20px;
+        // border-radius: 50rem;
+    }
+
+    input {
+        width: 100%;
+        border-radius: 50rem;
+    }
+
+    .button {
+        align-self: center;
+        padding: 10px;
+    }
+
+
+}

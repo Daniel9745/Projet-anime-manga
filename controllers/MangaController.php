@@ -6,11 +6,11 @@ class MangaController extends AbstractController{
         parent::__construct();
     }
 
-    public function ShowMangaById(){
+    public function ShowMangaById(string $mangaId){
         $mm = new MangaManager();
         
         $mangas= $mm->findOne(intval($mangaId));
-        return $this->render("manga.html.twig", ["mangaId" => $mangaId]);
+        return $this->render("manga.html.twig", ["mangas" => $mangas]);
     }
     
     public function ShowMangaList(){

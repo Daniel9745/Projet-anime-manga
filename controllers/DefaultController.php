@@ -6,19 +6,16 @@ class DefaultController extends AbstractController
         parent::__construct();
     }
 
-    public function home()
+    public function home(): void
     {
-        $categorieManager = new CategorieManager();
-        $categories = $categorieManager->findAll();
-       return $this->render("home.html.twig", ['categories'=> $categories]);
+        $isUserLoggedIn = isset($_SESSION['user']);
+
+
+        $this->render('front/home.html.twig', ['isUserLoggedIn' => $isUserLoggedIn]);  // modif de deco
     }
 
-    public function register(){
-        return $this->render("formInscription.html.twig", []);
+    public function notFound() : void
+    {
+        $this->render('front/error404.html.twig', []);
     }
-
-    public function login(){
-        return $this->render("formConnexion.html.twig", []);
-    }
-    
 }

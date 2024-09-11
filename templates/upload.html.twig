@@ -1,13 +1,14 @@
-{% extends "layout.html.twig" %}
+{% extends "admin/layout.html.twig" %}
 
 {% block main %}
-
-<form action="index.php?route=upload" method="POST" enctype="multipart/form-data">
-    <input type="text" name="name" />
+<div class="upload-file">
+    <h2 class="title-upload">Upload </h2>
+<form action="index.php?route=upload" class="form-file" method="POST" enctype="multipart/form-data">
+    <input type="text" name="name" placeholder="Nom"/>
     <input type="file" name="image" />
     <input type="hidden" name="formName" value="fileUpload" />
     <input type="text"  name="description" placeholder="Description"/>
     <input type="submit"/>
 </form>
-
+</div>
 {% endblock %}

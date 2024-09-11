@@ -1,0 +1,131 @@
+* {
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 62.5%;
+}
+
+body {
+    font-size: 1.6rem;
+}
+
+.container {
+    // max-width: 100%;
+    margin: auto;
+    padding: 30px;
+}
+li {
+    list-style: none;
+    // border: 5px solid black;
+
+}
+
+// .pagination {
+//     ul {
+//         display: flex;
+//         justify-content: center;
+//         padding-top: 1.5rem;
+
+//         li {
+//             margin: 1rem;
+//         }
+//     }
+
+//     a {
+//         color: black;
+//         background-color: white;
+//         padding: 1rem;
+//     }
+// }
+
+a {
+    text-decoration: none;
+}
+
+body {
+    background-image: url(../../../uploads/anime-landscape-blossom-canal-sakura-water-1021321.jpeg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    // background-position: top center;
+    width: 100%;
+    margin: 0;
+
+}
+%boxShadow {
+    box-shadow: 0, 1px, 5px rgba(0, 0, 0, 0.5);
+}
+@media screen and (min-width: 980px) {
+
+    .header {
+        background-color: $rose-claire;
+        // @extend li;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        padding: 10px 20px;
+
+        .navbar {
+
+            // @extend li;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+
+            ul {
+                display: flex;
+            }
+        }
+
+        .search {
+            border-radius: 3rem;
+            height: 30px;
+            width: 400px;
+            margin: 1rem 0;
+            padding: 0 1rem;
+            align-self: flex-end;
+
+        }
+    }
+
+
+    .container {
+        max-width: 1350px;
+    }
+
+    .fa-bars {
+        display: none;
+    }
+
+    .grid {
+        grid-template-columns: repeat(5, 1fr);
+    }
+
+}
+
+@media screen and (min-width: 768px) and (max-width: 980px) {
+    .header {
+        .navbar {
+            display: flex;
+            flex-direction: column;
+
+            ul {
+                display: flex;
+                justify-content: center;
+                width: 100%;
+                margin-bottom: 2rem;
+            }
+        }
+    }
+
+    .grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 50px;
+        margin-top: 20px;
+    }
+
+    .fa-bars {
+        display: none;
+    }
+}

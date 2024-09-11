@@ -1,11 +1,11 @@
 <?php
 
-class Users{
+class User{
     private ? int $id;
-
-    public function __construct(private string $username, private string $email, private string $password, private string $role, private DateTime $created_at)
+    private DateTime $created_at;
+    public function __construct(private string $username, private string $email, private string $password, private string $role)
     {
-        
+        $this->created_at = new DateTime("now", new DateTimeZone("Europe/Paris"));
     }
     public function getId(): ?int
     {

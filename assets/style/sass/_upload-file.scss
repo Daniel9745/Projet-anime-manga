@@ -1,0 +1,18 @@
+.upload-file{
+    align-self: center;
+    border: solid red 5px;
+    .title-upload{
+        text-transform: uppercase;
+        color: white;
+    }
+}
+.form-file{
+    display: flex;
+    flex-direction: column;
+    background-color: rgba(255, 255, 255, 0.7);
+    border: solid 5px black;
+    width: 800px;
+    height: 200px;
+    justify-content: center;
+
+}
