@@ -28,7 +28,6 @@ class Manga
         $this->name = $name;
     }
 
-    // Getter and Setter for synopsis_id
     public function getSynopsisId(): Synopsis
     {
         return $this->synopsis_id;
@@ -39,7 +38,6 @@ class Manga
         $this->synopsis_id = $synopsis_id;
     }
 
-    // Getter and Setter for author_id
     public function getAuthorId(): Author
     {
         return $this->author_id;
@@ -50,7 +48,6 @@ class Manga
         $this->author_id = $author_id;
     }
 
-    // Getter and Setter for publisher
     public function getPublisher(): string
     {
         return $this->publisher;
@@ -61,7 +58,6 @@ class Manga
         $this->publisher = $publisher;
     }
 
-    // Getter and Setter for volume_cover
     public function getVolumeCover(): Media
     {
         return $this->volume_cover;
@@ -72,18 +68,16 @@ class Manga
         $this->volume_cover = $volume_cover;
     }
 
-    // Getter and Setter for comments_id
-    public function getCommentsId(): string
+    public function getCommentsId(): ?string
     {
         return $this->comments_id;
     }
 
-    public function setCommentsId(string $comments_id): void
+    public function setCommentsId(?string $comments_id): void
     {
         $this->comments_id = $comments_id;
     }
 
-    // Getter and Setter for page_count
     public function getPageCount(): int
     {
         return $this->page_count;
@@ -94,7 +88,6 @@ class Manga
         $this->page_count = $page_count;
     }
 
-    // Getter and Setter for date_of_publication
     public function getDateOfPublication(): DateTime
     {
         return $this->date_of_publication;

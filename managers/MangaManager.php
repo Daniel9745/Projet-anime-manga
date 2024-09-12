@@ -11,8 +11,8 @@ class MangaManager extends AbstractManager
     {
         $am = new AuthorManager();
         $query = $this->db->prepare("SELECT manga.*, synopsis.content, media.name, media.url, media.alt FROM manga
-        JOIN media ON media.id = manga.volume_cover
-        JOIN synopsis ON manga.synopsis_id =synopsis.id WHERE manga.id = :id");
+            JOIN media ON media.id = manga.volume_cover
+            JOIN synopsis ON manga.synopsis_id = synopsis.id WHERE manga.id = :id");
         $parameters = [
             "id" => $id
         ];
@@ -23,6 +23,7 @@ class MangaManager extends AbstractManager
             $media = new Media($result["name"], $result["url"], $result["alt"]);
             $synopsis = new Synopsis($result["content"]);
             $author = $am->findAuthor($result["author_id"]);
+
             $date = DateTime::createFromFormat('Y-m-d H:i:s', $result["date_of_publication"]);
 
             $mangaId = new Manga($result["name"], $synopsis, $author, $result["publisher"], $media, $result["comments_id"], $result["page_count"], $date);
@@ -37,7 +38,7 @@ class MangaManager extends AbstractManager
 
         $am = new AuthorManager();
         $query = $this->db->prepare("SELECT manga.*, synopsis.content, media.name, media.url, media.alt FROM manga
-        JOIN media ON media.id = manga.volume_cover
+            JOIN media ON media.id = manga.volume_cover
         JOIN synopsis ON manga.synopsis_id =synopsis.id;");
         $query->execute();
         $result = $query->fetchAll(PDO::FETCH_ASSOC);
