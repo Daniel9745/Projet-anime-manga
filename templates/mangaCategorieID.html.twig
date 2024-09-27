@@ -1,0 +1,24 @@
+{% extends "front/layout.html.twig" %}
+
+{% block main %}
+
+<h2>Test</h2>
+    <div class="info">
+
+            <img src="{{ manga.volumeCover.url }}" alt="{{ manga.volumeCover.alt }}"/>
+
+        <div class="cardId card-info">
+            <h2 class="name-manga">{{ manga.name }}</h2>
+            <!-- {{ dump(manga) }} -->
+            <p>Auteur : {{ manga.authorId.name }}</p>
+            <p>Editeur: {{ manga.publisher.publisher }}</p>
+            <p>Nombre de pages: {{ manga.pageCount }}</p>
+            <p>Date de parution: {{ manga.dateOfPublication.format('d/m/y') }}</p>
+        </div>
+    </div>
+
+    <div class="cardId synopsis">
+        <p>Synopsis: {{ manga.synopsisId.content }}</p>
+    </div>
+
+{% endblock %}

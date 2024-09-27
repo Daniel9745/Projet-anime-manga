@@ -2,14 +2,6 @@
 session_start();
 require "vendor/autoload.php";
 
-// if(!isset($_SESSION["csrf_token"]))
-// {
-//     $tokenManager = new CSRFTokenManager();
-//     dump($tokenManager);
-//     $token = $tokenManager->generateCSRFToken();
-
-//     $_SESSION["csrf_token"] = $token;
-// }
 
 $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
 $dotenv->load();

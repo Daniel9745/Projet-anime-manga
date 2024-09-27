@@ -1,12 +1,55 @@
 {% extends "front/layout.html.twig" %}
 
 {% block main %}
+
+
+<?php
+
 <input type="search" class="search">
     <h1>Je suis une page liste de manga</h1>
-    
+    <div class="manga">
+    <aside class="categorie">
+        <h3> Les categories </h3>
+        <ul>
+        {% for categorie in categories %}
+        <li>
+            <a href="index.php?route=categorieManga&categorie={{ categorie.id }}"> {{ categorie.name }} </a>
+        </li>
+       {% endfor %}
+    </aside>
     <ul class="grid">
     {% for manga in mangaList %}
         <li class="card"><img src="{{manga.volumeCover.url}}" alt="{{manga.volumeCover.alt}}"/><a href="index.php?route=manga_id&id={{ manga.id }}">{{ manga.name }}</a></li>
     {% endfor %}
     </ul>
+    </div>
+    <h2>Les commenataires:</h2>
+        {% for comment in comments %}
+        <ul>
+            <li>
+                Commentaire de {{comment.getUserId().getUsername}} dans la categorie : {{ comment.getCategoriesId().name }}
+                <br>
+                {{ comment.content }}
+            </li>
+        </ul>
+        {% endfor %}
+
+    <form action="" method="post" class="form">
+        <input type="hidden" id="csrf_token" name="csrf_token" value="{{ csrf_token }}" />
+
+        <fieldset class="comments">
+        <label for="categorie" class="form-label">Catégorie </label>
+            <select name="categorie" id="categorie" required>
+                <option value="">--Choisissez une catégorie--</option>
+                {% for categorie in categories %}
+                <option value="{{ categorie.id }}">{{ categorie.name }}</option>
+                {% endfor %}
+            </select>
+
+        <label for="content" class="form-label">Commentaire</label>
+        <textarea name="content" id="content" required></textarea>
+    </fieldset>
+
+    <button type="submit">Valider</button>
+</form>
 {% endblock %}

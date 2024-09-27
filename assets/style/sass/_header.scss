@@ -1,3 +1,14 @@
+// .header {
+//     // background-color: $rose-claire;
+//     // @extend li;
+//     display: flex;
+//     flex-direction: column;
+//     justify-content: space-evenly;
+//     // text-align: center;
+//     padding: 10px 20px;
+
+//   }
+  
 .header {
     background-color: #FF94A9;
     // @extend li;
@@ -5,11 +16,11 @@
     flex-direction: column;
     justify-content: space-evenly;
     padding: 10px 20px;
-
+    border: 5px solid red;
     .navbar {
-        @extend li;
+        // @extend li;
         display: flex;
-        justify-content: space-between;
+        justify-content: space-around;
         align-items: center;
 
         a {
@@ -19,8 +30,8 @@
             padding: 1rem;
 
             &:hover {
-                background-color: white;
-                color: black;
+                background-color: $color-white;
+                color: $color-black;
             }
         }
 
@@ -28,7 +39,7 @@
         ul {
             display: none;
             padding: 0;
-            margin: 0 15rem;
+            // margin: 0 15rem;
 
             li {
                 list-style: none;

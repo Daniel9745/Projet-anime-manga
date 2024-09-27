@@ -89,8 +89,10 @@ class AuthController extends AbstractController
 
                 if ($user !== null) {
                     if (password_verify($_POST['password'], $user->getPassword())) {
+                        
                         $_SESSION['user'] = $user;
                         // $this->redirect(null);
+                       
                         $userRole = $_SESSION["user"]->getRole();
 
                         if ($userRole === "ADMIN") {
@@ -118,6 +120,7 @@ class AuthController extends AbstractController
 
     public function logout(): void
     {
+
         session_destroy();
         $this->redirect(null);
     }

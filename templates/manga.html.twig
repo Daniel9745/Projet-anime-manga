@@ -3,10 +3,12 @@
 {% block main %}
     <div class="info">
         <img src="{{mangas.volumeCover.url}}" alt="{{mangas.volumeCover.alt}}"/>
+        
         <div class="cardId card-info">
+            <!-- {{ dump(mangas) }} -->
             <h2 class="name-manga">{{ mangas.name }}</h2>
             <p>Auteur : {{ mangas.authorId.name}}</p>
-            <p>Editeur: {{mangas.publisher}}</p>
+            <p>Editeur: {{mangas.publisher.publisher}}</p>
             <p>Nombre de page: {{ mangas.pageCount}}</p>
             <p>Date de parution: {{mangas.dateOfPublication.format('d/m/y')}} </p>
         </div>

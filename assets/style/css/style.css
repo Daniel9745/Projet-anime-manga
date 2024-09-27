@@ -307,10 +307,11 @@ template {
   flex-direction: column;
   justify-content: space-evenly;
   padding: 10px 20px;
+  border: 5px solid red;
 }
 .header .navbar {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
 }
 .header .navbar a {
@@ -324,9 +325,8 @@ template {
 .header .navbar ul {
   display: none;
   padding: 0;
-  margin: 0 15rem;
 }
-.header .navbar ul li, .header .navbar ul .navbar {
+.header .navbar ul li {
   list-style: none;
   margin: 0 1.5rem;
 }
@@ -362,37 +362,223 @@ h1 {
   align-self: center;
   padding: 10px;
 }
-
-.card {
-  display: block;
-  padding: 1rem;
-  background-color: rgba(255, 255, 255, 0.7);
-  text-align: center;
-  border-radius: 2rem;
+.form .comments {
+  display: flex;
+  flex-direction: column;
+  background-color: #ecf0f1;
+  padding: 20px;
+  border-radius: 5px;
+  width: 100%;
+  margin: 0 auto;
+  height: 300px;
 }
-.card img {
-  width: 50%;
+.form .comments textarea {
+  border: 5px solid purple;
+  width: 100%;
+  border-radius: 7px;
+  max-height: 300px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+.container {
+  margin: auto;
+  padding: 30px;
+  max-width: 1350px;
+}
+
+li {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+body {
+  font-size: 1.6rem;
+  background-image: url(../../../uploads/anime-landscape-blossom-canal-sakura-water-1021321.jpeg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  color: black;
+  background-attachment: fixed;
+  width: 100%;
+  margin: 0;
+}
+
+ul.grid {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: 50px;
+  margin-top: 20px;
+}
+
+.navbar,
+ul,
+h1 {
+  border: 5px solid yellow;
+}
+
+input.search {
+  padding: 10px;
+  border: 2px solid #1403d3;
+  border-radius: 5px;
+  font-size: 1rem;
+  width: 100%;
+  max-width: 300px;
+  margin-bottom: 20px;
+  transition: border-color 0.3s;
+}
+input.search:focus {
+  border-color: black;
+  outline: none;
+}
+
+@media screen and (min-width: 980px) {
+  aside.categorie {
+    float: left;
+    background-color: #FF94A9;
+  }
+  body {
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    width: 100%;
+    margin: 0;
+  }
+  .header {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    padding: 10px 20px;
+  }
+  .header .navbar {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  }
+  .header .navbar ul {
+    display: flex;
+  }
+  .container {
+    max-width: 1350px;
+  }
+  .fa-bars {
+    display: none;
+  }
+  ul.grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 50px;
+    padding: 0;
+    list-style: none;
+  }
+  .manga {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    gap: 20px;
+    width: 100vw;
+    max-width: 100%;
+  }
+  aside.categorie {
+    border: 5px solid green;
+    text-align: center;
+  }
+  aside.categorie ul {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    padding: 0;
+    height: 20%;
+  }
+  aside.categorie li {
+    text-align: center;
+  }
+  aside.categorie li a {
+    width: 100%;
+    display: block;
+  }
+}
+@media screen and (min-width: 768px) and (max-width: 980px) {
+  .header .navbar {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+  }
+  .header .navbar ul {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin-bottom: 2rem;
+  }
+  ul.grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    margin-top: 20px;
+  }
+  .fa-bars {
+    display: none;
+  }
+  li.card {
+    width: 100%;
+  }
+  img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  aside.categorie {
+    text-align: center;
+  }
+  aside.categorie ul li {
+    background-color: #FF94A9;
+    width: 100%;
+  }
+}
+.card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: rgba(255, 255, 255, 0.7);
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  overflow: hidden;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
 }
 .card a {
   display: block;
-  margin-top: 1rem;
+  padding: 20px;
+  text-align: center;
+  align-items: center;
   text-decoration: none;
-  color: black;
-  background-color: #DC52B4;
-  border-radius: 2rem;
-  padding: 1rem 0;
+  color: white;
+  font-weight: bold;
+  border: 5px solid red;
+  background-color: #FF94A9;
 }
 .card a:hover {
-  background-color: white;
   color: black;
+  background-color: white;
 }
-.card .img {
-  max-width: 100%;
-  border-radius: 1rem;
+
+.img {
+  max-width: 400px;
 }
 
 .cardId {
-  background-color: rgba(255, 255, 255, 0.7);
   padding: 1rem;
   margin-bottom: 1rem;
   width: 100%;
@@ -401,29 +587,58 @@ h1 {
   float: right;
 }
 
-.grid {
-  display: grid;
-  grid-template-columns: repeat(1, 1fr);
-  gap: 50px;
-  margin-top: 20px;
-}
-
 .name-manga {
   font-size: 3rem;
 }
 
 .info {
   display: flex;
+  background-color: white;
+  align-items: center;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  margin-bottom: 2rem;
+}
+.info img {
+  max-width: 200px;
+  height: auto;
+  margin-right: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-.card-info {
-  margin-left: 1rem;
+.cardId {
+  background-color: white;
+}
+.cardId .name-manga {
+  color: #FF94A9;
+  margin-bottom: 0.5rem;
+}
+.cardId p {
+  margin-bottom: 0.5rem;
+  font-size: 1.5rem;
+  line-height: 1.4;
+}
+.cardId .synopsis {
+  padding: 1.5rem;
+  border-radius: 9px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  color: #ff2e57;
 }
 
-.synopsis {
-  margin-top: 1rem;
+aside.categorie a {
+  color: black;
+  font-size: 1.2rem;
+  background-color: #EF82B9;
+  padding: 10px 0;
+}
+aside.categorie a:hover {
+  background-color: white;
+  color: #1403d3;
 }
 
+/*******************************************************************************************************/
 .upload-file {
   align-self: center;
   border: solid red 5px;
@@ -441,97 +656,4 @@ h1 {
   width: 800px;
   height: 200px;
   justify-content: center;
-}
-
-* {
-  box-sizing: border-box;
-}
-
-html {
-  font-size: 62.5%;
-}
-
-body {
-  font-size: 1.6rem;
-}
-
-.container {
-  margin: auto;
-  padding: 30px;
-}
-
-li, .header .navbar {
-  list-style: none;
-}
-
-a {
-  text-decoration: none;
-}
-
-body {
-  background-image: url(../../../uploads/anime-landscape-blossom-canal-sakura-water-1021321.jpeg);
-  background-repeat: no-repeat;
-  background-size: cover;
-  width: 100%;
-  margin: 0;
-}
-
-.card {
-  box-shadow: 0, 1px, 5px rgba(0, 0, 0, 0.5);
-}
-
-@media screen and (min-width: 980px) {
-  .header {
-    background-color: #FF94A9;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    padding: 10px 20px;
-  }
-  .header .navbar {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-  }
-  .header .navbar ul {
-    display: flex;
-  }
-  .header .search {
-    border-radius: 3rem;
-    height: 30px;
-    width: 400px;
-    margin: 1rem 0;
-    padding: 0 1rem;
-    align-self: flex-end;
-  }
-  .container {
-    max-width: 1350px;
-  }
-  .fa-bars {
-    display: none;
-  }
-  .grid {
-    grid-template-columns: repeat(5, 1fr);
-  }
-}
-@media screen and (min-width: 768px) and (max-width: 980px) {
-  .header .navbar {
-    display: flex;
-    flex-direction: column;
-  }
-  .header .navbar ul {
-    display: flex;
-    justify-content: center;
-    width: 100%;
-    margin-bottom: 2rem;
-  }
-  .grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 50px;
-    margin-top: 20px;
-  }
-  .fa-bars {
-    display: none;
-  }
 }/*# sourceMappingURL=style.css.map */

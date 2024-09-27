@@ -1,7 +1,7 @@
 {% extends 'front/layout.html.twig' %}
 
 {% block main %}
-    <main class="container py-5">
+
         {% if session.error_message %}
             <div class="alert alert-danger" role="alert">
                 {{ session.error_message }}
@@ -29,5 +29,4 @@
                 <button type="submit" class="button">Connexion</button>
 
         </form>
-    </main>
 {% endblock %}

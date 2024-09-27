@@ -1,0 +1,23 @@
+{% extends "front/layout.html.twig" %}
+
+{% block main %}
+        <!-- {{ dump(mangas) }} -->
+    <input type="search" class="search">
+
+    
+    <h1>Mangas dans la catégorie : {{ category.name }}
+
+    </h1>
+    
+        <!-- {{ dump(mangas) }} -->
+    <ul class="grid">
+        {% for manga in mangas %}
+        <li class="card">
+            <img src="{{ manga.volumeCover.url }}" alt="{{ manga.volumeCover.alt }}" />
+            <a href="index.php?route=mangaCategorieId&id={{ manga.id }}">
+                <p><strong>{{ manga.name }}</strong></p>
+            </a>
+        </li>
+    {% endfor %}
+</ul>
+{% endblock %}

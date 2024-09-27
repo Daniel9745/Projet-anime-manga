@@ -11,7 +11,6 @@
         {% endblock %}
 </head>
 <body>
-    <header>
         <header class="header">
         <nav class="navbar">
             <h1>My WeebList</h1>
@@ -20,15 +19,14 @@
                 <li><a href="#">Anime</a></li>
                 <li><a href="index.php?route=manga">manga</a></li>
                 {% if isUserLoggedIn %}
-                    <li class="navbarbutton"> <a href="index.php?route=deconnexion">Déconnexion</li>
+                    <li class="navbarbutton"> <a href="index.php?route=deconnexion">Déconnexion</a></li>
                 {% else %}
                     <li><a href="index.php?route=inscription">Inscription / Connexion</a></li>
                 {% endif %}
             </ul>
             <i class="fa-solid fa-x2 fa-bars"></i>
         </nav>
-    </header>
-    </header>
+         </header>
     <main class="container">
         
         {%block main %}

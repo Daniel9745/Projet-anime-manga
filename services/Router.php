@@ -9,7 +9,8 @@ class Router
     private MangaController $mc;
     private UploadController $upc;
     private UserController $uc;
-
+    private CategoriesController $cc;
+    private CommentController $coc;
     public function __construct()
     {
         $this->dc = new DefaultController();
@@ -19,6 +20,8 @@ class Router
         $this->upc = new UploadController();
         $this->adc = new AdminController();
         $this->uc = new UserController();
+        $this->cc = new CategoriesController();
+        $this->coc = new CommentController();
         
     }
     public function handleRequest(array $get) : void
@@ -105,15 +108,29 @@ class Router
         {
             $this->anc->ShowAnimeById();
         }
-        else if(isset($get["route"]) && $get["route"] === "manga")
+        else if(isset($get["route"]) && $get["route"] === "manga" )
         {
+            $this->coc->checkComment();
             $this->mc->ShowMangaList();
         }
+       
         else if (isset($get["route"]) && $get["route"] === "manga_id" && isset($get["id"])) 
         {
             $this->mc->ShowMangaById($get["id"]);
-        }else
+        }
+        else if  (isset($get["route"]) && $get["route"] === "categorieManga" && isset($get["categorie"]))
         {
+            // echo " test";
+            $this->cc->categorieById(intval ($get["categorie"]));
+        }
+        else if (isset($get["route"]) && $get["route"] === "mangaCategorieId" && isset($get["id"])) 
+        {
+            $this->mc->mangaById(intval($get["id"]));
+            // var_dump(intval($get["id"]));
+        }
+        else
+        {
+            // var_dump($get["categorie"]);
             // le code si c'est aucun des cas précédents ( === page 404)
             $this->dc->notFound();
         }
@@ -121,31 +138,4 @@ class Router
         
     }
     
-    // private function checkAdminAccess(): void
-    // {
-    //     if(isset($_SESSION['user']) 
-    //         && isset($_SESSION['role']) && $_SESSION['role'] === "ADMIN")
-    //         {
-    //             // c'est bon
-    //             $this->adc->homePage();
-    //         }
-    //         else
-    //         {
-    //                  // c'est pas bon : redirection avec un header('Location:')
-    //                  $this->redirect("admin-connexion");
-    //         }
-    // }
-    
-    // protected function redirect(? string $route) : void 
-    // {
-    //     if($route !== null)
-    //     {
-    //         header("Location: index.php?route=$route");
-    //     }
-    //     else
-    //     {
-    //         header("Location: index.php");
-    //     }
-    //     exit();
-    // } 
 }

@@ -1,65 +1,119 @@
 .card {
-    @extend %boxShadow;
-    display: block;
-    padding: 1rem;
-    background-color: rgba($blanc, 0.1);
-    text-align: center;
-    border-radius: 2rem;
+    // @extend %boxShadow;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: rgba($color-white, 0.7);
+    border-radius: $card-border-radius;
+    box-shadow: $card-box-shadow;
 
-    img {
-        width: 50%;
+    text-align: center;
+
+    overflow: hidden;
+    transition: transform 0.3s, box-shadow 0.3s;
+
+    &:hover {
+        transform: scale(1.05);
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
     }
+
 
     a {
         display: block;
-        margin-top: 1rem;
+        padding: 20px;
+        text-align: center;
+        align-items: center;
         text-decoration: none;
-        color: black;
-        background-color: $mauve;
-        border-radius: 2rem;
-        padding: 1rem 0;
+        color: $color-white;
+        font-weight: bold;
+        border: 5px solid red;
+        background-color: $color-pink;
 
 
         &:hover {
-            background-color:$blanc;
-            color: black;
+            color: $color-black;
+            background-color: $color-white;
         }
-    }
-
-    .img {
-        max-width: 100%;
-        border-radius: 1rem;
     }
 }
 
+
+.img {
+    max-width: 400px;
+    // border-radius: 1rem;
+}
+
 .cardId {
-    background-color: $blanc-opacity;
+
     padding: 1rem;
     margin-bottom: 1rem;
     width: 100%;
-    .img{
+
+    .img {
         float: right;
     }
 }
 
-.grid {
-    display: grid;
-    grid-template-columns: repeat(1, 1fr);
-    gap: 50px;
-    margin-top: 20px;
-}
-.name-manga{
+
+.name-manga {
     font-size: 3rem;
 }
-.info{
+
+.info {
     display: flex;
+    background-color: $color-white;
+    align-items: center;
+    padding: $size + 0.5rem;
+    border-radius: $size + 7px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: $size + 1rem;
+
+    img {
+        max-width: 200px;
+        height: auto;
+        margin-right: 1rem;
+        border-radius: 8px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
 }
 
-.card-info{
-    margin-left: $size + 1rem;
-    align-items: center;
+.cardId {
+    
+    background-color: $color-white;
+    .name-manga{
+        color: $color-pink;
+        margin-bottom: 0.5rem;
+    }
+    p{
+        margin-bottom: 0.5rem;
+        font-size: $size + 0.5rem;
+        line-height: 1.4;
+    }
+    .synopsis{
+        padding: 1.5rem;
+        border-radius: $size + 8px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        color: darken($color-pink, 20%);
+    }
+
 }
-.synopsis{
-    margin-top: $size + 1rem;
-    padding: $size + 10px;
+
+aside.categorie {
+
+    a {
+        color: $color-black;
+
+        //       text-decoration: none;
+        font-size: 1.2rem;
+        background-color: #EF82B9;
+        padding: 10px 0;
+        //       transition: color 0.3s;
+
+        &:hover {
+            background-color: $color-white;
+            color: $color-blue;
+        }
+    }
 }
+
+/*******************************************************************************************************/
