@@ -22,25 +22,19 @@ class CommentController extends AbstractController{
         $com = new CommentsManager();
         
         if (isset($_POST["categorie"]) && isset($_POST["content"]) && isset($_SESSION["user"])){
+     
+            $userId = $_SESSION["user"]->getId(); 
 
-            dump($_SESSION['user']);
+            $user = $um->findUserById($_SESSION["user"]->getId());
 
-            $userId = $_SESSION['user']->getId();
 
-            $user = $um->findUserById($userId);
-
-            dump($userId);
-            
-            
             $category = $_POST["categorie"];
             $categorie = $cm->findOne($category);
-            
+
             $content = $_POST["content"];
-            dump($content);
+
             
             $comment = new Comments($content, $user, $categorie);
-
-            dump($comment);
 
             $commentaire = $com->createComment($comment);
             

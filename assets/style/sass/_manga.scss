@@ -1,11 +1,12 @@
 .card {
     // @extend %boxShadow;
-    display: flex;
+    // display: flex;
     flex-direction: column;
     justify-content: space-between;
     background-color: rgba($color-white, 0.7);
     border-radius: $card-border-radius;
     box-shadow: $card-box-shadow;
+
 
     text-align: center;
 
@@ -26,13 +27,13 @@
         text-decoration: none;
         color: $color-white;
         font-weight: bold;
-        border: 5px solid red;
-        background-color: $color-pink;
+        // border: 5px solid red;
+        background-color: $color-pink-purple;
 
 
         &:hover {
             color: $color-black;
-            background-color: $color-white;
+            // background-color: $color-white;
         }
     }
 }
@@ -80,6 +81,7 @@
 .cardId {
     
     background-color: $color-white;
+    
     .name-manga{
         color: $color-pink;
         margin-bottom: 0.5rem;
@@ -99,9 +101,24 @@
 }
 
 aside.categorie {
-
-    a {
-        color: $color-black;
+    text-align: center;
+    background-color: $color-pink;
+    // border: 5px solid green;
+  
+    ul {
+    //   border: 5px solid red;
+    //   display: block;
+    padding-left: 0;
+      height: 30%;
+      
+      li {
+        width: 100%;
+        // border: 5px solid yellow;
+        align-self: center;
+        display: block;
+        a{
+          display: block;
+          color: $color-black;
 
         //       text-decoration: none;
         font-size: 1.2rem;
@@ -113,7 +130,13 @@ aside.categorie {
             background-color: $color-white;
             color: $color-blue;
         }
+  
+        }
+      }
     }
-}
+  }
+
+
+
 
 /*******************************************************************************************************/

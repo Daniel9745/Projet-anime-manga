@@ -21,8 +21,6 @@ abstract class AbstractController
     protected function render(string $template, array $data): void
     {
 
-        // var_dump("Rendering template: " . $template);
-
         // Vérifie si l'utilisateur est connecté
         $isUserLoggedIn = isset($_SESSION['user']);
         $data['isUserLoggedIn'] = $isUserLoggedIn;
@@ -41,5 +39,10 @@ abstract class AbstractController
         } else {
             header("Location: index.php");
         }
+    }
+
+    protected function isAjaxRequest(): bool
+    {
+        return isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest';
     }
 }

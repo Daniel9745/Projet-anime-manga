@@ -110,8 +110,10 @@ class Router
         }
         else if(isset($get["route"]) && $get["route"] === "manga" )
         {
+            $this->mc->searchManga();
             $this->coc->checkComment();
             $this->mc->ShowMangaList();
+            
         }
        
         else if (isset($get["route"]) && $get["route"] === "manga_id" && isset($get["id"])) 

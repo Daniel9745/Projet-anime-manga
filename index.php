@@ -1,6 +1,6 @@
 <?php
-session_start();
 require "vendor/autoload.php";
+session_start();
 
 
 $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
@@ -17,3 +17,5 @@ if(isset($_POST["formName"]) && isset($_POST['description']))
     $media = $uploader->upload($_FILES, "image", $description);
     var_dump($media);
 }
+
+

@@ -1,11 +1,11 @@
 {% extends "front/layout.html.twig" %}
 
 {% block main %}
+<form method="GET">
 
+<input type="search" class="search" id="search">
 
-<?php
-
-<input type="search" class="search">
+</form>
     <h1>Je suis une page liste de manga</h1>
     <div class="manga">
     <aside class="categorie">
@@ -23,18 +23,55 @@
     {% endfor %}
     </ul>
     </div>
-    <h2>Les commenataires:</h2>
+
+    <ul class="pagination-manga">
+
+                <li class="page-item {% if currentPage == 1 %}disabled{% endif %}">
+                    <a class="page-link" href="index.php?route=manga&page={{ currentPage - 1 }}">Precedent</a>
+                </li>
+
+                {% for i in 1..pagesManga %}
+                    <li class="page-item {% if i == currentPage %}active{% endif %}">
+                        <a class="page-link" href="index.php?route=manga&page={{ i }}">{{ i }}</a>
+                    </li>
+                {% endfor %}
+                
+                <li class="page-item {% if currentPage == pagesManga %}disabled{% endif %}">
+                    <a class="page-link" href="index.php?route=manga&page={{ currentPage + 1 }}">Suivant</a>
+                </li>
+            </ul>
+
+    <div class="commentaire">
+        <h2>Les commenataires:</h2>
         {% for comment in comments %}
         <ul>
             <li>
                 Commentaire de {{comment.getUserId().getUsername}} dans la categorie : {{ comment.getCategoriesId().name }}
                 <br>
+            </li>
+            <li>
                 {{ comment.content }}
             </li>
         </ul>
         {% endfor %}
+    </div>
+    <ul class="pagination-manga">
+            <li class="page-item {% if currentPageComment == 1 %}disabled{% endif %}">
+                <a class="page-link" href="index.php?route=manga&pageComment={{ currentPageComment - 1 }}">Precedent</a>
+            </li>
 
-    <form action="" method="post" class="form">
+            {% for i in 1..pagesComment %}
+                <li class="page-item {% if i == currentPageComment %}active{% endif %}">
+                    <a class="page-link" href="index.php?route=manga&pageComment={{ i }}">{{ i }}</a>
+                </li>
+            {% endfor %}
+
+            <li class="page-item {% if currentPageComment == pagesComment %}disabled{% endif %}">
+                <a class="page-link" href="index.php?route=manga&pageComment={{ currentPageComment + 1 }}">Suivant</a>
+            </li>
+    </ul>
+
+    <form action="" method="post" class="form form-comment">
         <input type="hidden" id="csrf_token" name="csrf_token" value="{{ csrf_token }}" />
 
         <fieldset class="comments">

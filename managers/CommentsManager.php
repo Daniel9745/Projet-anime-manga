@@ -23,7 +23,7 @@ class CommentsManager extends AbstractManager{
         // $result = $query->fetch(PDO::FETCH_ASSOC);
 
         $comments->setId($this->db->lastInsertId());
-        dump($comments);
+        // dump($comments);
         return $comments;
 
     }
@@ -53,11 +53,15 @@ class CommentsManager extends AbstractManager{
     }
 
 
-    public function findAllComments(){
+    public function findAllComments(int $premierPageComment, int $parPageComment){
 
         $query = $this->db->prepare('SELECT comments.*, users.*, categories.name FROM comments
         JOIN users ON comments.user_id = users.id
-        JOIN categories ON comments.categories_id = categories.id');
+        JOIN categories ON comments.categories_id = categories.id
+        ORDER BY created_at DESC LIMIT :premierPageComment, :parPageComment');
+
+        $query->bindValue(":premierPageComment", $premierPageComment, PDO::PARAM_INT);
+        $query->bindValue(":parPageComment", $parPageComment, PDO::PARAM_INT);
 
         $query->execute();
         $result = $query->fetchAll(PDO::FETCH_ASSOC);
@@ -78,4 +82,18 @@ class CommentsManager extends AbstractManager{
         }
         return $commentaire;
     }
+
+
+    public function countComment(){
+
+        $query = $this->db->prepare("SELECT COUNT(*) AS nb_comment FROM comments
+            LEFT JOIN users ON comments.user_id = users.id
+            LEFT JOIN categories ON comments.categories_id = categories.id");
+            $query->execute();
+            $result = $query->fetch(PDO::FETCH_ASSOC);
+    
+            return (int) $result['nb_comment'];
+
+            // dump($result["nb_comment"]);
+       }
 }

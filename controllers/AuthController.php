@@ -120,7 +120,6 @@ class AuthController extends AbstractController
 
     public function logout(): void
     {
-
         session_destroy();
         $this->redirect(null);
     }

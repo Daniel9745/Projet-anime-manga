@@ -2,11 +2,14 @@
 
 class User{
     private ? int $id;
+
     private DateTime $created_at;
+
     public function __construct(private string $username, private string $email, private string $password, private string $role)
     {
         $this->created_at = new DateTime("now", new DateTimeZone("Europe/Paris"));
     }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -15,6 +18,16 @@ class User{
     public function setId(?int $id): void
     {
         $this->id = $id;
+    }
+
+    public function getCreatedAt(): DateTime
+    {
+        return $this->created_at;
+    }
+
+    public function setCreatedAt(DateTime $created_at): void
+    {
+        $this->created_at = $created_at;
     }
 
     public function getUsername(): string
@@ -37,6 +50,7 @@ class User{
         $this->email = $email;
     }
 
+
     public function getPassword(): string
     {
         return $this->password;
@@ -55,15 +69,5 @@ class User{
     public function setRole(string $role): void
     {
         $this->role = $role;
-    }
-
-    public function getCreatedAt(): DateTime
-    {
-        return $this->created_at;
-    }
-
-    public function setCreatedAt(DateTime $created_at): void
-    {
-        $this->created_at = $created_at;
     }
 }

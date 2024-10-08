@@ -4,7 +4,7 @@ class Manga
 {
     private ?int $id;
 
-    public function __construct(private string $name, private Synopsis $synopsis_id, private Author $author_id, private Publisher $publisher, private Media $volume_cover, private ? string $comments_id, private int $page_count, private DateTime $date_of_publication)
+    public function __construct(private string $name, private Synopsis $synopsis_id, private Author $author_id, private Publisher $publisher, private Media $volume_cover, private int $page_count, private DateTime $date_of_publication)
     {
     }
 
@@ -60,16 +60,6 @@ class Manga
     public function setVolumeCover(Media $volume_cover): void {
         $this->volume_cover = $volume_cover;
     }
-
-
-    public function getCommentsId(): ?string {
-        return $this->comments_id;
-    }
-
-    public function setCommentsId(?string $comments_id): void {
-        $this->comments_id = $comments_id;
-    }
-
 
     public function getPageCount(): int {
         return $this->page_count;

@@ -20,26 +20,57 @@ class MangaController extends AbstractController{
         $mm = new MangaManager();
         $cm = new CategorieManager();
         $com = new CommentsManager();
+    
+        /****************************************Pagination Manga***********************/
+        if (isset($_GET["page"]) && !empty($_GET["page"])) {
+            $currentPage = (int) strip_tags($_GET["page"]);
+        } else {
+            $currentPage = 1;
+        }
+    
+        if ($currentPage < 1) {
+            $currentPage = 1;
+        }
+    
+        $nb_manga = $mm->countManga();
+        $parPage = 9;
 
-        // $comments = $com->findallComments();
+        $pagesManga = ceil($nb_manga / $parPage);
 
-        // print_r($comments);
+        $premier = ($currentPage * $parPage) - $parPage;
 
-        // die;
+        if ($premier < 0) {
+            $premier = 0;
+        }
+    
+        /********************************* Pagination Commentaire*************************/
+        if (isset($_GET["pageComment"]) && !empty($_GET["pageComment"])) {
+
+            $currentPageComment = (int) strip_tags($_GET["pageComment"]);
+
+        } else {
+            $currentPageComment = 1;
+        }
+    
+        if ($currentPageComment < 1) {
+            
+            $currentPageComment = 1;
+        }
+        /************************************fin*******************************************/
+        $nb_comment = $com->countComment();
+        $parPageComment = 4;
+        $pagesComment = ceil($nb_comment / $parPageComment);
+        $premierPageComment = ($currentPageComment * $parPageComment) - $parPageComment;
+        if ($premierPageComment < 0) {
+            $premierPageComment = 0;
+        }
+
+        $mangaList = $mm->findAll($premier, $parPage);
+        $comments = $com->findAllComments($premierPageComment, $parPageComment);
+        $categories = $cm->findAll();
 
 
-        $com = new CommentsManager();
-
-        $comments = $com->findAllComments();
-        // dump($comments);
-
-        $categories = $cm ->findAll();
-        
-        $mangaList= $mm->findAll();
-
-        
-        return $this->render("mangas.html.twig", ["mangaList" => $mangaList, "categories" => $categories, "comments" => $comments]);
-        
+        return $this->render("mangas.html.twig", ["mangaList" => $mangaList,"categories" => $categories,"comments" => $comments,"pagesManga" => $pagesManga,"pagesComment" => $pagesComment,"currentPage" => $currentPage,"currentPageComment" => $currentPageComment]);
     }
     
     public function mangaById(int $mangaId){
@@ -47,8 +78,46 @@ class MangaController extends AbstractController{
  
         $manga= $mm->findOne($mangaId);
 
-        // dump($manga);
-        // die;
         return $this->render("mangaCategorieID.html.twig", ["manga" => $manga]);
     }
+
+
+
+
+    public function searchManga()
+    {
+        if ($this->isAjaxRequest()) {
+    
+            ob_start();  // Démarrez le tampon de sortie dès le début
+    
+            $query = $_GET['search'] ?? '';
+    
+            $mm = new MangaManager();
+            $search = $mm->searchMangaAjax($query);
+
+            if ($search) {
+                $dataValue = array_map(function($search) {
+                    return [
+                        'id' => $search->getId(),
+                        'name' => htmlspecialchars($search->getName(), ENT_QUOTES, 'UTF-8'),
+                        'volumeCover' => [
+                            'url' => htmlspecialchars($search->getVolumeCover()->getUrl(), ENT_QUOTES, 'UTF-8'),
+                            'alt' => htmlspecialchars($search->getVolumeCover()->getAlt(), ENT_QUOTES, 'UTF-8')
+                        ]
+                    ];
+                }, $search);
+    
+                // header('Content-Type: application/json');
+                echo json_encode($dataValue);
+            } else {
+                echo json_encode([]);  // JSON vide si aucun résultat
+            }
+    
+            ob_end_flush(); // Vide le tampon de sortie et envoie les en-têtes
+            exit;
+        }
+    }
+    
+
+
 }
