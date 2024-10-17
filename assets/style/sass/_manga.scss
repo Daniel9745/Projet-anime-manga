@@ -1,3 +1,7 @@
+.retour{
+    background-color: lighten($color-pink, 20%) ;
+    border: 1px solid $color-black;
+}
 .card {
     // @extend %boxShadow;
     // display: flex;
@@ -6,7 +10,7 @@
     background-color: rgba($color-white, 0.7);
     border-radius: $card-border-radius;
     box-shadow: $card-box-shadow;
-
+    // width: 70%;
 
     text-align: center;
 
@@ -44,25 +48,15 @@
     // border-radius: 1rem;
 }
 
-.cardId {
-
-    padding: 1rem;
-    margin-bottom: 1rem;
-    width: 100%;
-
-    .img {
-        float: right;
-    }
-}
-
 
 .name-manga {
     font-size: 3rem;
 }
 
 .info {
-    display: flex;
-    background-color: $color-white;
+    // display: flex;
+    // flex-direction: column;
+    background-color: rgba($color-white, 0.8);
     align-items: center;
     padding: $size + 0.5rem;
     border-radius: $size + 7px;
@@ -79,8 +73,15 @@
 }
 
 .cardId {
+    padding: 1rem;
+    margin-bottom: 1rem;
+    width: 100%;
+    background-color: rgba($color-white, 0.8);
+
+    .img {
+        float: right;
+    }
     
-    background-color: $color-white;
     
     .name-manga{
         color: $color-pink;

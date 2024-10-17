@@ -4,7 +4,7 @@ class Manga
 {
     private ?int $id;
 
-    public function __construct(private string $name, private Synopsis $synopsis_id, private Author $author_id, private Publisher $publisher, private Media $volume_cover, private int $page_count, private DateTime $date_of_publication)
+    public function __construct(private string $name, private Synopsis $synopsis_id, private Author $author_id, private Publisher $publisher, private Media $volume_cover, private int $page_count,private Othermanga $othermanga, private DateTime $date_of_publication)
     {
     }
 
@@ -16,7 +16,6 @@ class Manga
         $this->id = $id;
     }
 
-
     public function getName(): string {
         return $this->name;
     }
@@ -24,7 +23,6 @@ class Manga
     public function setName(string $name): void {
         $this->name = $name;
     }
-
 
     public function getSynopsisId(): Synopsis {
         return $this->synopsis_id;
@@ -43,7 +41,6 @@ class Manga
         $this->author_id = $author_id;
     }
 
-
     public function getPublisher(): Publisher {
         return $this->publisher;
     }
@@ -52,23 +49,34 @@ class Manga
         $this->publisher = $publisher;
     }
 
-
     public function getVolumeCover(): Media {
         return $this->volume_cover;
     }
+
 
     public function setVolumeCover(Media $volume_cover): void {
         $this->volume_cover = $volume_cover;
     }
 
+
     public function getPageCount(): int {
         return $this->page_count;
     }
+
 
     public function setPageCount(int $page_count): void {
         $this->page_count = $page_count;
     }
 
+
+    public function getOthermanga(): Othermanga {
+        return $this->othermanga;
+    }
+
+
+    public function setOthermanga(Othermanga $othermanga): void {
+        $this->othermanga = $othermanga;
+    }
 
     public function getDateOfPublication(): DateTime {
         return $this->date_of_publication;

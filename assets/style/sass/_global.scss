@@ -1,5 +1,6 @@
 * {
   box-sizing: border-box;
+
 }
 
 html {
@@ -70,6 +71,35 @@ input.search {
     outline: none;
   }
 }
+.pagination-manga {
+  display: flex;
+  justify-content: center;
+  margin: $size + 6rem 0;
+  // border: 5px solid greenyellow;
+  align-items: center;
+  padding: 0;
+  text-align: center;
+  // width: 100%;
+  font-size: 1.5rem;
+  .page-item {
+    display: block;
+    padding: 0;
+    // padding: $size + 10px;
+    border: 1px solid black;
+    margin: 0 15px;
+    
+    .page-link {
+      background-color: $color-pink-purple;
+      padding: 10px;
+      // border: 5px solid red;
+      display: block;
+      width: 100%;
+      font-size: 1.5rem;
+    }
+  }
+
+}
+
 
 @media screen and (min-width: 980px) {
 
@@ -86,14 +116,14 @@ input.search {
   .header {
 
     display: flex;
-    flex-direction: column;
     justify-content: space-evenly;
     padding: 10px 20px;
-
+    
     .navbar {
-
+      
       // @extend li;
       display: flex;
+      flex-direction: row;
       justify-content: space-around;
       align-items: center;
 
@@ -133,6 +163,11 @@ input.search {
     max-width: 100%;
   }
 
+  .info{
+    display: flex;
+flex-direction: row;
+  }
+
   aside.categorie {
     background-color: $color-pink;
     // border: 5px solid green;
@@ -162,34 +197,7 @@ input.search {
   }
 }
 
-.pagination-manga {
-  display: flex;
-  justify-content: center;
-  margin: $size + 6rem 0;
-  // border: 5px solid greenyellow;
-  align-items: center;
-  padding: 0;
-  text-align: center;
-  // width: 100%;
-  font-size: 1.5rem;
-  .page-item {
-    display: block;
-    padding: 0;
-    // padding: $size + 10px;
-    border: 1px solid black;
-    margin: 0 15px;
-    
-    .page-link {
-      background-color: $color-pink-purple;
-      padding: 10px;
-      // border: 5px solid red;
-      display: block;
-      width: 100%;
-      font-size: 1.5rem;
-    }
-  }
 
-}
 
 @media screen and (min-width: 768px) and (max-width: 980px) {
 
@@ -247,7 +255,11 @@ input.search {
       }
     }
   }
-
+  .info{
+    display: flex;
+flex-direction: row;
+  }
+  
   .pagination-manga {
     display: flex;
     justify-content: space-evenly;

@@ -3,10 +3,10 @@
 {% block main %}
 <form method="GET">
 
-<input type="search" class="search" id="search">
+<input type="search" class="search" id="search" placeholder="Recherchez un manga...">
 
 </form>
-    <h1>Je suis une page liste de manga</h1>
+
     <div class="manga">
     <aside class="categorie">
         <h3> Les categories </h3>
@@ -24,22 +24,21 @@
     </ul>
     </div>
 
-    <ul class="pagination-manga">
+<ul class="pagination-manga">
+    <li class="page-item {% if currentPage == 1 %}disabled{% endif %}">
+        <a class="page-link" href="index.php?route=manga&page={{ currentPage - 1 }}">Précédent</a>
+    </li>
 
-                <li class="page-item {% if currentPage == 1 %}disabled{% endif %}">
-                    <a class="page-link" href="index.php?route=manga&page={{ currentPage - 1 }}">Precedent</a>
-                </li>
+    {% for i in 1..pagesManga %}
+        <li class="page-item {% if i == currentPage %}active{% endif %}">
+            <a class="page-link" href="index.php?route=manga&page={{ i }}">{{ i }}</a>
+        </li>
+    {% endfor %}
 
-                {% for i in 1..pagesManga %}
-                    <li class="page-item {% if i == currentPage %}active{% endif %}">
-                        <a class="page-link" href="index.php?route=manga&page={{ i }}">{{ i }}</a>
-                    </li>
-                {% endfor %}
-                
-                <li class="page-item {% if currentPage == pagesManga %}disabled{% endif %}">
-                    <a class="page-link" href="index.php?route=manga&page={{ currentPage + 1 }}">Suivant</a>
-                </li>
-            </ul>
+    <li class="page-item {% if currentPage == pagesManga %}disabled{% endif %}">
+        <a class="page-link" href="index.php?route=manga&page={{ currentPage + 1 }}">Suivant</a>
+    </li>
+</ul>
 
     <div class="commentaire">
         <h2>Les commenataires:</h2>

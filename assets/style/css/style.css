@@ -1,3 +1,23 @@
+* {
+  font-family: "oswlad";
+}
+
+h1 {
+  font-family: "roboto";
+  font-weight: 100;
+}
+
+.titleHome h2 {
+  font-size: 3rem;
+}
+.titleHome p {
+  font-size: 1.2rem;
+}
+
+.nouveaute h3 {
+  font-size: 2rem;
+}
+
 html {
   line-height: 1.15; /* 1 */
   -webkit-text-size-adjust: 100%; /* 2 */
@@ -301,6 +321,26 @@ template {
   display: none;
 }
 
+.titleHome {
+  text-align: center;
+  background-color: rgba(255, 255, 255, 0.7);
+  padding: 10px;
+  align-self: center;
+  margin: 50px 0;
+}
+
+.nouveaute {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.nouveauManga {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: space-around;
+  gap: 20px;
+}
+
 .header {
   background-color: #FF94A9;
   display: flex;
@@ -376,14 +416,14 @@ h1 {
 .commentaire ul {
   padding-left: 10px;
 }
-.commentaire li {
+.commentaire ul li {
   background-color: white;
   border: 2px solid #FF94A9;
   border-radius: 4px;
   padding: 7px;
   transition: background-color 0.6s;
 }
-.commentaire li:hover {
+.commentaire ul li:nth-child(2):hover {
   background-color: #ffc7d2;
 }
 
@@ -419,6 +459,10 @@ textarea {
 
 textarea {
   height: 100px;
+}
+
+.ici {
+  color: #1403d3;
 }
 
 * {
@@ -483,6 +527,29 @@ input.search:focus {
   outline: none;
 }
 
+.pagination-manga {
+  display: flex;
+  justify-content: center;
+  margin: 7rem 0;
+  align-items: center;
+  padding: 0;
+  text-align: center;
+  font-size: 1.5rem;
+}
+.pagination-manga .page-item {
+  display: block;
+  padding: 0;
+  border: 1px solid black;
+  margin: 0 15px;
+}
+.pagination-manga .page-item .page-link {
+  background-color: #EF82B9;
+  padding: 10px;
+  display: block;
+  width: 100%;
+  font-size: 1.5rem;
+}
+
 @media screen and (min-width: 980px) {
   body {
     background-repeat: no-repeat;
@@ -494,12 +561,12 @@ input.search:focus {
   }
   .header {
     display: flex;
-    flex-direction: column;
     justify-content: space-evenly;
     padding: 10px 20px;
   }
   .header .navbar {
     display: flex;
+    flex-direction: row;
     justify-content: space-around;
     align-items: center;
   }
@@ -529,6 +596,10 @@ input.search:focus {
     width: 100vw;
     max-width: 100%;
   }
+  .info {
+    display: flex;
+    flex-direction: row;
+  }
   aside.categorie {
     background-color: #FF94A9;
     text-align: center;
@@ -549,29 +620,6 @@ input.search:focus {
     display: block;
   }
 }
-.pagination-manga {
-  display: flex;
-  justify-content: center;
-  margin: 7rem 0;
-  align-items: center;
-  padding: 0;
-  text-align: center;
-  font-size: 1.5rem;
-}
-.pagination-manga .page-item {
-  display: block;
-  padding: 0;
-  border: 1px solid black;
-  margin: 0 15px;
-}
-.pagination-manga .page-item .page-link {
-  background-color: #EF82B9;
-  padding: 10px;
-  display: block;
-  width: 100%;
-  font-size: 1.5rem;
-}
-
 @media screen and (min-width: 768px) and (max-width: 980px) {
   .header .navbar {
     display: flex;
@@ -611,6 +659,10 @@ input.search:focus {
   aside.categorie ul li {
     display: block;
   }
+  .info {
+    display: flex;
+    flex-direction: row;
+  }
   .pagination-manga {
     display: flex;
     justify-content: space-evenly;
@@ -626,6 +678,11 @@ input.search:focus {
     width: 100%;
   }
 }
+.retour {
+  background-color: #fffafb;
+  border: 1px solid black;
+}
+
 .card {
   flex-direction: column;
   justify-content: space-between;
@@ -658,22 +715,12 @@ input.search:focus {
   max-width: 400px;
 }
 
-.cardId {
-  padding: 1rem;
-  margin-bottom: 1rem;
-  width: 100%;
-}
-.cardId .img {
-  float: right;
-}
-
 .name-manga {
   font-size: 3rem;
 }
 
 .info {
-  display: flex;
-  background-color: white;
+  background-color: rgba(255, 255, 255, 0.8);
   align-items: center;
   padding: 1.5rem;
   border-radius: 8px;
@@ -689,7 +736,13 @@ input.search:focus {
 }
 
 .cardId {
-  background-color: white;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.8);
+}
+.cardId .img {
+  float: right;
 }
 .cardId .name-manga {
   color: #FF94A9;

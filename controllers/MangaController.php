@@ -8,7 +8,8 @@ class MangaController extends AbstractController{
 
     }
 
-    public function ShowMangaById(string $mangaId){
+    public function ShowMangaById(string $mangaId)
+    {
         $mm = new MangaManager();
         
         $mangas= $mm->findOne(intval($mangaId));
@@ -21,28 +22,17 @@ class MangaController extends AbstractController{
         $cm = new CategorieManager();
         $com = new CommentsManager();
     
+        
         /****************************************Pagination Manga***********************/
-        if (isset($_GET["page"]) && !empty($_GET["page"])) {
-            $currentPage = (int) strip_tags($_GET["page"]);
-        } else {
-            $currentPage = 1;
-        }
-    
-        if ($currentPage < 1) {
-            $currentPage = 1;
-        }
-    
-        $nb_manga = $mm->countManga();
+     
+        $currentPage = isset($_GET["page"]) ? (int)$_GET["page"] : 1;
         $parPage = 9;
+        $nb_manga = $mm->countManga();
 
         $pagesManga = ceil($nb_manga / $parPage);
 
-        $premier = ($currentPage * $parPage) - $parPage;
+        $premier = ($currentPage -1) * $parPage;
 
-        if ($premier < 0) {
-            $premier = 0;
-        }
-    
         /********************************* Pagination Commentaire*************************/
         if (isset($_GET["pageComment"]) && !empty($_GET["pageComment"])) {
 
@@ -56,7 +46,6 @@ class MangaController extends AbstractController{
             
             $currentPageComment = 1;
         }
-        /************************************fin*******************************************/
         $nb_comment = $com->countComment();
         $parPageComment = 4;
         $pagesComment = ceil($nb_comment / $parPageComment);
@@ -64,6 +53,7 @@ class MangaController extends AbstractController{
         if ($premierPageComment < 0) {
             $premierPageComment = 0;
         }
+        /************************************fin*******************************************/
 
         $mangaList = $mm->findAll($premier, $parPage);
         $comments = $com->findAllComments($premierPageComment, $parPageComment);

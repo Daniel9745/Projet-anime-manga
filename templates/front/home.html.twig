@@ -1,5 +1,29 @@
 {% extends "front/layout.html.twig" %}
 
+
 {% block main%}
-<h1>Page d'accueil</h1>
+<section class="titleHome">
+<h2>Bienvenue sur My WeebList</h2>
+<p>Recherchez vos mangas préférés, découvrez de nouveaux titres et plongez dans l'univers de vos héros préférés !</p>
+</section>
+
+
+<section class="nouveaute">
+    <h3>Nouveautés</h3>
+    <div class="nouveauManga">
+        <div class="newItem">
+            <img src="images/newmanga1.jpg" alt="New Manga 1">
+            <p>Titre du Manga 1</p>
+        </div>
+        <div class="newItem">
+            <img src="images/newmanga2.jpg" alt="New Manga 2">
+            <p>Titre du Manga 2</p>
+        </div>
+        <div class="newItem">
+            <img src="images/newmanga3.jpg" alt="New Manga 3">
+            <p>Titre du Manga 3</p>
+        </div>
+    </div>
+</section>
+
 {% endblock%}

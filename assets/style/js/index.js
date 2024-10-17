@@ -66,6 +66,7 @@ function htmlspecialchars(unsafe) {
 }
 
 document.addEventListener('DOMContentLoaded', function () {
+    menuBurger();
     const searchInput = document.querySelector('.search');
     const grid = document.querySelector('.grid');
 

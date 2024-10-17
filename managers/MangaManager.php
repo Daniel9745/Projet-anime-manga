@@ -16,14 +16,17 @@ class MangaManager extends AbstractManager
         $pm = new PublisherManager();
         $am = new AuthorManager();
 
-        $query = $this->db->prepare("SELECT manga.*, synopsis.content, media.name, media.url, media.alt FROM manga
+        $query = $this->db->prepare("SELECT manga.*, synopsis.content, media.name, media.url, media.alt, othermanga.* FROM manga
             JOIN media ON media.id = manga.volume_cover
-            JOIN synopsis ON manga.synopsis_id = synopsis.id WHERE manga.id = :id");
+            JOIN synopsis ON manga.synopsis_id = synopsis.id
+            JOIN othermanga ON othermanga.othermanga_id = manga.otherManga
+            WHERE manga.id = :id");
         $parameters = [
             "id" => $id
         ];
         $query->execute($parameters);
         $result = $query->fetch(PDO::FETCH_ASSOC);
+
 
         if ($result) {
             $media = new Media($result["name"], $result["url"], $result["alt"]);
@@ -31,8 +34,9 @@ class MangaManager extends AbstractManager
             $author = $am->findAuthor($result["author_id"]);
             $publisher = $pm->findPublisher($result["publisher"]);
             $date = DateTime::createFromFormat('Y-m-d H:i:s', $result["date_of_publication"]);
+            $othermanga = new OtherManga($result["manga_name"]);
 
-            $mangaId = new Manga($result["name"], $synopsis, $author, $publisher, $media, $result["page_count"], $date);
+            $mangaId = new Manga($result["name"], $synopsis, $author, $publisher, $media, $result["page_count"], $othermanga, $date);
             $mangaId->setId($result["id"]);
             return $mangaId;
         }
@@ -41,43 +45,49 @@ class MangaManager extends AbstractManager
 
     public function findAll(int $premier, int $parPage): array
     {
-
         $am = new AuthorManager();
         $pm = new PublisherManager();
         
-        $query = $this->db->prepare("SELECT manga.*, synopsis.content, media.name, media.url, media.alt FROM manga
+        // Modifier le JOIN en LEFT JOIN pour inclure tous les mangas
+        $query = $this->db->prepare("SELECT manga.*, synopsis.content, media.name, media.url, media.alt, othermanga.*
+            FROM manga
             JOIN media ON media.id = manga.volume_cover
-        JOIN synopsis ON manga.synopsis_id =synopsis.id ORDER BY date_of_publication DESC LIMIT :premier, :parPage");
-
+            JOIN synopsis ON manga.synopsis_id = synopsis.id
+            JOIN othermanga ON othermanga.othermanga_id = manga.othermanga
+            ORDER BY date_of_publication DESC LIMIT :premier, :parPage");
+    
         $query->bindValue(":premier", $premier, PDO::PARAM_INT);
         $query->bindValue(":parPage", $parPage, PDO::PARAM_INT);
-
+    
         $query->execute();
         $result = $query->fetchAll(PDO::FETCH_ASSOC);
         $mangaList = [];
         
         foreach ($result as $item) {
-
             $media = new Media($item["name"], $item["url"], $item["alt"]);
             $synopsis = new Synopsis($item["content"]);
             $author = $am->findAuthor($item["author_id"]);
             $publisher = $pm->findPublisher($item["publisher"]);
             $date = DateTime::createFromFormat('Y-m-d H:i:s', $item["date_of_publication"]);
-
-            $manga = new Manga($item["name"], $synopsis, $author, $publisher, $media, $item["page_count"], $date);
+            
+            // Vérifier si 'manga_name' existe dans $item avant d'instancier OtherManga
+            $othermanga = new OtherManga($item["manga_name"]);
+    
+            $manga = new Manga($item["name"], $synopsis, $author, $publisher, $media, $item["page_count"], $othermanga, $date);
             $manga->setId($item["id"]);
             $mangaList[] = $manga;
         }
-
+    
         return $mangaList;
     }
 
     public function mangaByCategories(int $categorieId): array
     {
-        $query = $this->db->prepare("SELECT manga.*, synopsis.content, media.name, media.url, media.alt FROM manga
+        $query = $this->db->prepare("SELECT manga.*, synopsis.content, media.name, media.url, media.alt, othermanga.* FROM manga
             JOIN mangacategories ON manga.id = mangacategories.manga_id
             JOIN media ON media.id = manga.volume_cover
             JOIN synopsis ON manga.synopsis_id = synopsis.id
+            JOIN othermanga ON othermanga.othermanga_id = manga.otherManga
             WHERE mangacategories.categories_id = :categorieId");
 
         $parameters = [
@@ -97,8 +107,9 @@ class MangaManager extends AbstractManager
             $author = $am->findAuthor($result["author_id"]);
             $publisher = $pm->findPublisher($result["publisher"]);
             $date = DateTime::createFromFormat('Y-m-d H:i:s', $result["date_of_publication"]);
+            $othermanga = new OtherManga($item["manga_name"]);
 
-            $manga = new Manga($result["name"], $synopsis, $author, $publisher, $media, $result["page_count"], $date);
+            $manga = new Manga($item["name"], $synopsis, $author, $publisher, $media, $item["page_count"], $othermanga, $date);
             $manga->setId($result["id"]);
 
             $mangas[] = $manga;
@@ -114,6 +125,7 @@ class MangaManager extends AbstractManager
            JOIN mangacategories ON manga.id = mangacategories.manga_id
            JOIN media ON media.id = manga.volume_cover
            JOIN synopsis ON manga.synopsis_id = synopsis.id
+           JOIN othermanga ON othermanga.othermanga_id = manga.otherManga
            WHERE manga.id = :mangaId");
 
        $parameters = [
@@ -132,8 +144,9 @@ class MangaManager extends AbstractManager
            $publisher = $pm->findPublisher($result["publisher"]);
            $author = $am->findAuthor($result["author_id"]);
            $date = DateTime::createFromFormat('Y-m-d H:i:s', $result["date_of_publication"]);
+           $othermanga = new OtherManga($item["manga_name"]);
 
-           $manga = new Manga($result["name"], $synopsis, $author, $publisher, $media, $result["page_count"], $date);
+           $manga = new Manga($item["name"], $synopsis, $author, $publisher, $media, $item["page_count"], $othermanga, $date);
            $manga->setId($result["id"]);
            return $manga;
         // dump($manga);
@@ -146,9 +159,7 @@ class MangaManager extends AbstractManager
    public function countManga()
    {
 
-    $query = $this->db->prepare("SELECT COUNT(*) AS nb_manga FROM manga
-        LEFT JOIN media ON media.id = manga.volume_cover
-        LEFT JOIN synopsis ON manga.synopsis_id =synopsis.id");
+    $query = $this->db->prepare("SELECT COUNT(*) AS nb_manga FROM manga");
         $query->execute();
         $result = $query->fetch(PDO::FETCH_ASSOC);
 
@@ -162,16 +173,15 @@ class MangaManager extends AbstractManager
        $pm = new PublisherManager();
    
        // Préparation de la requête SQL
-       $query = $this->db->prepare("
-           SELECT manga.*, synopsis.content, media.name, media.url, media.alt 
-           FROM manga
+       $query = $this->db->prepare("SELECT manga.*, synopsis.content, media.name, media.url, media.alt, othermanga.* FROM manga
            JOIN media ON media.id = manga.volume_cover
            JOIN synopsis ON manga.synopsis_id = synopsis.id 
+           JOIN othermanga ON othermanga.othermanga_id = manga.otherManga
            WHERE manga.name LIKE :search
        ");
    
        $parameters = [
-           'search' => '%' . $search . '%'
+           'search' => $search . '%'
        ];
        
        // Exécution de la requête
@@ -187,10 +197,9 @@ class MangaManager extends AbstractManager
            $author = $am->findAuthor($item["author_id"]);
            $publisher = $pm->findPublisher($item["publisher"]);
            $date = DateTime::createFromFormat('Y-m-d H:i:s', $item["date_of_publication"]);
-   
-           // Instanciation de l'objet Manga
-           $mangaSearch = new Manga($item["name"], $synopsis, $author, $publisher, $media, $item["page_count"], $date
-           );
+           $othermanga = new OtherManga($item["manga_name"]);
+
+           $mangaSearch = new Manga($item["name"], $synopsis, $author, $publisher, $media, $item["page_count"], $othermanga, $date);
            
            $mangaSearch->setId($item["id"]);
            $mangaPage[] = $mangaSearch;
@@ -198,54 +207,6 @@ class MangaManager extends AbstractManager
    
        return $mangaPage;
    }
-   
-
-// public function searchMangaAjax(string $search): array
-// {
-//     $am = new AuthorManager();
-//     $pm = new PublisherManager();
-
-//     $query = '%' . $search . '%';
-//     $sql = "
-//         SELECT manga.*, synopsis.content, media.name AS media_name, media.url, media.alt 
-//         FROM manga
-//         JOIN media ON media.id = manga.volume_cover
-//         JOIN synopsis ON manga.synopsis_id = synopsis.id 
-//         WHERE manga.name LIKE :search
-//     ";
-
-//     $stmt = $this->db->prepare($sql);
-//     $stmt->bindParam(':search', $query, PDO::PARAM_STR);
-//     $stmt->execute();
-//     $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-//     $mangaPage = [];
-
-//     foreach ($result as $item) {
-//         // Récupération des objets associés
-//         $media = new Media($item["media_name"], $item["url"], $item["alt"]);
-//         $synopsis = new Synopsis($item["content"]);
-//         $author = $am->findAuthor($item["author_id"]);
-//         $publisher = $pm->findPublisher($item["publisher"]);
-//         $date = DateTime::createFromFormat('Y-m-d H:i:s', $item["date_of_publication"]);
-
-//         // Instanciation de l'objet Manga
-//         $manga = new Manga(
-//             $item["name"], 
-//             $synopsis, 
-//             $author, 
-//             $publisher, 
-//             $media, 
-//             $item["page_count"], 
-//             $date
-//         );
-        
-//         $manga->setId($item["id"]);
-//         $mangaPage[] = $manga;  // Ajout à la liste
-//     }
-
-//     return $mangaPage;
-// }
 
     
 }
