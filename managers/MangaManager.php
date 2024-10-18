@@ -43,7 +43,46 @@ class MangaManager extends AbstractManager
         return null;
     }
 
-    public function findAll(int $premier, int $parPage): array
+    // public function findAll(int $premier, int $parPage): array
+    // {
+    //     $am = new AuthorManager();
+    //     $pm = new PublisherManager();
+        
+    //     // Modifier le JOIN en LEFT JOIN pour inclure tous les mangas
+    //     $query = $this->db->prepare("SELECT manga.*, synopsis.content, media.name, media.url, media.alt, othermanga.*
+    //         FROM manga
+    //         JOIN media ON media.id = manga.volume_cover
+    //         JOIN synopsis ON manga.synopsis_id = synopsis.id
+    //         JOIN othermanga ON othermanga.othermanga_id = manga.othermanga
+    //         ORDER BY date_of_publication DESC LIMIT :premier, :parPage");
+    
+    //     $query->bindValue(":premier", $premier, PDO::PARAM_INT);
+    //     $query->bindValue(":parPage", $parPage, PDO::PARAM_INT);
+    
+    //     $query->execute();
+    //     $result = $query->fetchAll(PDO::FETCH_ASSOC);
+    //     $mangaList = [];
+        
+    //     foreach ($result as $item) {
+    //         $media = new Media($item["name"], $item["url"], $item["alt"]);
+    //         $synopsis = new Synopsis($item["content"]);
+    //         $author = $am->findAuthor($item["author_id"]);
+    //         $publisher = $pm->findPublisher($item["publisher"]);
+    //         $date = DateTime::createFromFormat('Y-m-d H:i:s', $item["date_of_publication"]);
+            
+    //         // Vérifier si 'manga_name' existe dans $item avant d'instancier OtherManga
+    //         $othermanga = new OtherManga($item["manga_name"]);
+    
+    //         $manga = new Manga($item["name"], $synopsis, $author, $publisher, $media, $item["page_count"], $othermanga, $date);
+    //         $manga->setId($item["id"]);
+    //         $mangaList[] = $manga;
+    //     }
+    
+    //     return $mangaList;
+    // }
+
+
+    public function findAll(): array
     {
         $am = new AuthorManager();
         $pm = new PublisherManager();
@@ -54,10 +93,9 @@ class MangaManager extends AbstractManager
             JOIN media ON media.id = manga.volume_cover
             JOIN synopsis ON manga.synopsis_id = synopsis.id
             JOIN othermanga ON othermanga.othermanga_id = manga.othermanga
-            ORDER BY date_of_publication DESC LIMIT :premier, :parPage");
+            ORDER BY date_of_publication DESC");
     
-        $query->bindValue(":premier", $premier, PDO::PARAM_INT);
-        $query->bindValue(":parPage", $parPage, PDO::PARAM_INT);
+
     
         $query->execute();
         $result = $query->fetchAll(PDO::FETCH_ASSOC);
@@ -80,7 +118,6 @@ class MangaManager extends AbstractManager
     
         return $mangaList;
     }
-
     public function mangaByCategories(int $categorieId): array
     {
         $query = $this->db->prepare("SELECT manga.*, synopsis.content, media.name, media.url, media.alt, othermanga.* FROM manga

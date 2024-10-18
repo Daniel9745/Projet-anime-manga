@@ -17,22 +17,57 @@ class MangaController extends AbstractController{
         return $this->render("manga.html.twig", ["mangas" => $mangas]);
     }
     
+    // public function ShowMangaList(){
+    //     $mm = new MangaManager();
+    //     $cm = new CategorieManager();
+    //     $com = new CommentsManager();
+    
+        
+    //     /****************************************Pagination Manga***********************/
+     
+    //     $currentPage = isset($_GET["page"]) ? (int)$_GET["page"] : 1;
+    //     $parPage = 9;
+    //     $nb_manga = $mm->countManga();
+
+    //     $pagesManga = ceil($nb_manga / $parPage);
+
+    //     $premier = ($currentPage -1) * $parPage;
+
+    //     /********************************* Pagination Commentaire*************************/
+    //     if (isset($_GET["pageComment"]) && !empty($_GET["pageComment"])) {
+
+    //         $currentPageComment = (int) strip_tags($_GET["pageComment"]);
+
+    //     } else {
+    //         $currentPageComment = 1;
+    //     }
+    
+    //     if ($currentPageComment < 1) {
+            
+    //         $currentPageComment = 1;
+    //     }
+    //     $nb_comment = $com->countComment();
+    //     $parPageComment = 4;
+    //     $pagesComment = ceil($nb_comment / $parPageComment);
+    //     $premierPageComment = ($currentPageComment * $parPageComment) - $parPageComment;
+    //     if ($premierPageComment < 0) {
+    //         $premierPageComment = 0;
+    //     }
+    //     /************************************fin*******************************************/
+
+    //     $mangaList = $mm->findAll($premier, $parPage);
+    //     $comments = $com->findAllComments($premierPageComment, $parPageComment);
+    //     $categories = $cm->findAll();
+
+
+    //     return $this->render("mangas.html.twig", ["mangaList" => $mangaList,"categories" => $categories,"comments" => $comments,"pagesManga" => $pagesManga,"pagesComment" => $pagesComment,"currentPage" => $currentPage,"currentPageComment" => $currentPageComment]);
+    // }
+
     public function ShowMangaList(){
         $mm = new MangaManager();
         $cm = new CategorieManager();
         $com = new CommentsManager();
     
-        
-        /****************************************Pagination Manga***********************/
-     
-        $currentPage = isset($_GET["page"]) ? (int)$_GET["page"] : 1;
-        $parPage = 9;
-        $nb_manga = $mm->countManga();
-
-        $pagesManga = ceil($nb_manga / $parPage);
-
-        $premier = ($currentPage -1) * $parPage;
-
         /********************************* Pagination Commentaire*************************/
         if (isset($_GET["pageComment"]) && !empty($_GET["pageComment"])) {
 
@@ -55,15 +90,15 @@ class MangaController extends AbstractController{
         }
         /************************************fin*******************************************/
 
-        $mangaList = $mm->findAll($premier, $parPage);
+        $mangaList = $mm->findAll();
         $comments = $com->findAllComments($premierPageComment, $parPageComment);
         $categories = $cm->findAll();
 
 
-        return $this->render("mangas.html.twig", ["mangaList" => $mangaList,"categories" => $categories,"comments" => $comments,"pagesManga" => $pagesManga,"pagesComment" => $pagesComment,"currentPage" => $currentPage,"currentPageComment" => $currentPageComment]);
+        return $this->render("mangas.html.twig", ["mangaList" => $mangaList,"categories" => $categories,"comments" => $comments,"pagesComment" => $pagesComment,"currentPageComment" => $currentPageComment]);
     }
     
-    public function mangaById(int $mangaId){
+  public function mangaById(int $mangaId){
         $mm = new MangaManager();
  
         $manga= $mm->findOne($mangaId);
