@@ -9,6 +9,7 @@ class AdminController extends AbstractController
     }
 
     public function homePage() : void {
+        
         $this->render('admin/home.html.twig', []);
     }
 

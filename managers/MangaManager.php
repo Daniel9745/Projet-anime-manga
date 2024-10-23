@@ -144,9 +144,9 @@ class MangaManager extends AbstractManager
             $author = $am->findAuthor($result["author_id"]);
             $publisher = $pm->findPublisher($result["publisher"]);
             $date = DateTime::createFromFormat('Y-m-d H:i:s', $result["date_of_publication"]);
-            $othermanga = new OtherManga($item["manga_name"]);
+            $othermanga = new OtherManga($result["manga_name"]);
 
-            $manga = new Manga($item["name"], $synopsis, $author, $publisher, $media, $item["page_count"], $othermanga, $date);
+            $manga = new Manga($result["name"], $synopsis, $author, $publisher, $media, $result["page_count"], $othermanga, $date);
             $manga->setId($result["id"]);
 
             $mangas[] = $manga;

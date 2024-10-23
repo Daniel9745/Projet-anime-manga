@@ -10,6 +10,11 @@ $router = new Router();
 
 $router->handleRequest($_GET);
 
+if(isset($_SESSION['role']) && $_SESSION['role'] = 'ADMIN'){
+    $sessionRole = $_SESSION['role'] ;
+}
+
+
 if(isset($_POST["formName"]) && isset($_POST['description']))
 {
     $description = $_POST['description'];

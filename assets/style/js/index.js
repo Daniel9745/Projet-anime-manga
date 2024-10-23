@@ -1,192 +1,3 @@
-// function menuBurger() {
-//     const menu = document.querySelector(".fa-bars");
-//     const ul = document.querySelector(".navbar ul");
-//     // console.log(ul);
-//     // console.log(menu);
-    
-    
-    
-//     menu.addEventListener("click", function () {
-//         ul.classList.toggle("hidden");
-//         // console.log(ul);
-//     })
-// }
-
-
-
-
-// // function searchBar(url, grid) {
-// //     grid.innerHTML = '<p class="loading">Chargement des mangas...</p>'; // Message de chargement
-
-// //     fetch(url, {
-// //         method: 'GET',
-// //         headers: {
-// //             'X-Requested-With': 'XMLHttpRequest'
-// //         }
-// //     })
-// //     .then(response => {
-// //         if (!response.ok) {
-// //             throw new Error('Erreur Ajax');
-// //         }
-// //         return response.json();
-// //     })
-// //     .then(mangas => {
-
-// //         grid.innerHTML = '';  // Vider le container avant d'ajouter les résultats
-    
-// //         if (mangas.length > 0) {
-// //             mangas.forEach(manga => {
-// //                 const mangaHtml = `
-// //                     <li class="card">
-// //                         <img src="${manga.volumeCover.url}" alt="${manga.volumeCover.alt}"/>
-// //                         <a href="index.php?route=manga_id&id=${manga.id}">${manga.name}</a>
-// //                     </li>
-// //                 `;
-
-// //                 grid.insertAdjacentHTML('beforeend', mangaHtml);
-// //             });
-// //         } else {
-// //             grid.innerHTML = '<p class="search-error">Aucun manga ne correspond à votre recherche.</p>';
-// //         }
-// //     })
-// //     .catch(error => {
-// //         console.error('Erreur lors de la requête Ajax :', error);
-// //         grid.innerHTML = '<p class="search-error">Erreur de chargement des mangas. Veuillez réessayer.</p>';
-// //     });
-    
-// // }
-
-// function searchBar(url, grid,currentPage = 1) {
-//     const cardParPage = 9; //limite de cartes par page
-//     let totalPages = 1; //Initialisé à 1, sera calculer apres avoir obtenu les mangas
-
-//     grid.innerHTML = '<p class="loading">Chargement des mangas...</p>'; // Message de chargement
-
-//     fetch(url, {
-//         method: 'GET',
-//         headers: {
-//             'X-Requested-With': 'XMLHttpRequest'
-//         }
-//     })
-//     .then(response => {
-//         if (!response.ok) {
-//             throw new Error('Erreur Ajax');
-//         }
-//         return response.json();
-//     })
-//     .then(mangas => {
-
-//         grid.innerHTML = '';  // Vider le container avant d'ajouter les résultats
-    
-//         if (mangas.length > 0) {
-//             totalPages = Math.ceil(mangas.length / cardParPage);
-//             //affiche les mangas correspondant à la page actuelle
-
-//             const debut = (currentPage-1) * cardParPage;
-//             const fin = currentPage * cardParPage;
-//             const mangaToShow = mangas.slice(debut , fin);
-
-//             mangaToShow.forEach((manga,index) => {
-//                 const mangaHtml = `
-//                     <li class="card page-${currentPage}">
-//                         <img src="${manga.volumeCover.url}" alt="${manga.volumeCover.alt}"/>
-//                         <a href="index.php?route=manga_id&id=${manga.id}">${manga.name}</a>
-//                     </li>
-//                 `;
-
-//                 grid.insertAdjacentHTML('beforeend', mangaHtml);
-//             });
-
-//             //desactive les cartes des autres page
-
-//             for(let i =1; i <= totalPages; i++){
-//                 if(i !== currentPage){
-//                     const  cardDisable = grid.querySelectorAll(`.page-${i}`);
-//                     cardDisable.forEach(card=> {
-//                         card.classList.add('hidden');
-//                     });
-//                 }
-//             }
-//             // Créer les boutons de pagination
-//             pagination(grid, totalPages, currentPage);
-//         } else {
-//             grid.innerHTML = '<p class="search-error">Aucun manga ne correspond à votre recherche.</p>';
-//         }
-//     })
-//     .catch(error => {
-//         console.error('Erreur lors de la requête Ajax :', error);
-//         grid.innerHTML = '<p class="search-error">Erreur de chargement des mangas. Veuillez réessayer.</p>';
-//     });
-    
-// }
-
-
-// function pagination(grid, totalPages, currentPage){
-//     let paginationHtml = '<div class= "pagination">';
-
-//     //bouton précédent
-
-//     if(currentPage > 1){
-//         paginationHtml += `<button class="pagination-btn prev" data-page="${currentPage - 1}"> Précédent </button>`;
-//     }
-
-//     // Bouton des pages
-//     for (let i = 1; i <= totalPages; i++) {
-//         paginationHtml += `<button class="pagination-btn ${i === currentPage ? 'active' : ''}" data-page="${i}">${i}</button>`;
-//     }
-
-//     //Bouton suivant
-
-//     if (currentPage < totalPages) {
-//         paginationHtml += `<button class="pagination-btn next" data-page="${currentPage + 1}">Suivant</button>`;
-//     }
-    
-//     paginationHtml += '</div>'
-
-//     grid.insertAdjacentHTML('afterend', paginationHtml);
-    
-//     // Ajout d'événement aux boutons de pagination
-//     const paginationsButton = document.querySelectorAll('.pagination-btn');
-//     // console.log(paginationsButton);
-
-//     paginationsButton.forEach(button => {
-//         button.addEventListener('click', (event) =>{
-//             const page = parseInt(event.target.getAttribute('data-page'));
-//             changePage(page);
-//         });
-//     });
-// }
-// function changePage(page){
-//     const grid = document.querySelector(".grid");   // Selection la grille de manga
-//     const url = 'index.php?route=mangas'; //Remplacez par l'URL réelle de l'API
-//     searchBar(url, grid, page); // Recharger avec la nouvelle page
-// }
-
-// function htmlspecialchars(unsafe) {
-//     return unsafe
-//         .replace(/&/g, "&amp;")
-//         .replace(/</g, "&lt;")
-//         .replace(/>/g, "&gt;")
-//         .replace(/"/g, "&quot;")
-//         .replace(/'/g, "&#039;");
-// }
-
-// document.addEventListener('DOMContentLoaded', function () {
-//     menuBurger();
-//     const searchInput = document.querySelector('.search');
-//     const grid = document.querySelector('.grid');
-
-//     // Activation de la barre de recherche
-//     searchInput.addEventListener('input', function() {
-//         const query = searchInput.value.trim();
-//         const url = `index.php?route=manga&search=${encodeURIComponent(query)}`;
-//         // console.log("URL de recherche : ", url);
-//         searchBar(url, grid);
-//     });
-// });
-
-
-
 function menuBurger() {
     const menu = document.querySelector(".fa-bars");
     const ul = document.querySelector(".navbar ul");
@@ -197,8 +8,10 @@ function menuBurger() {
 }
 
 function searchBar(url, grid, currentPage = 1) {
-    const cardParPage = 9; // Limite de cartes par page
-    let totalPages = 1; // Initialisé à 1, sera calculé après avoir obtenu les mangas
+    // Limite de cartes par page
+    const cardParPage = 9; 
+    // Initialisé à 1, sera calculé après avoir obtenu les mangas
+    let totalPages = 1; 
 
     grid.innerHTML = '<p class="loading">Chargement des mangas...</p>'; // Message de chargement
 
@@ -292,7 +105,7 @@ function pagination(grid, totalPages, currentPage) {
     paginationButtons.forEach(button => {
         button.addEventListener('click', (event) => {
             const page = parseInt(event.target.getAttribute('data-page'));
-            console.log("Page cliquée : ", page);  // Debugging: vérifier que la bonne page est sélectionnée
+
             changePage(page);
         });
     });
@@ -315,16 +128,19 @@ function htmlspecialchars(unsafe) {
 
 document.addEventListener('DOMContentLoaded', function () {
     menuBurger();
-    const searchInput = document.querySelector('.search');
-    const grid = document.querySelector('.grid');
+    // if(window.Location.href.include('index.php?route=manga')){
+        const searchInput = document.querySelector('.search');
+        const grid = document.querySelector('.grid');
+    
+        // Activation de la barre de recherche
+        searchInput.addEventListener('input', function() {
+            const query = searchInput.value.trim();
+            const url = `index.php?route=manga&search=${encodeURIComponent(query)}`;
+            console.log("URL de recherche : ", url);  // Debugging: vérifier l'URL de recherche
+            searchBar(url, grid);
+        });
+        const url = 'index.php?route=manga';  // URL par défaut pour récupérer tous les mangas
+        searchBar(url, grid);  // Appel initial à la fonction searchBar
 
-    // Activation de la barre de recherche
-    searchInput.addEventListener('input', function() {
-        const query = searchInput.value.trim();
-        const url = `index.php?route=manga&search=${encodeURIComponent(query)}`;
-        console.log("URL de recherche : ", url);  // Debugging: vérifier l'URL de recherche
-        searchBar(url, grid);
-    });
-    const url = 'index.php?route=manga';  // URL par défaut pour récupérer tous les mangas
-    searchBar(url, grid);  // Appel initial à la fonction searchBar
+    // }
 });
