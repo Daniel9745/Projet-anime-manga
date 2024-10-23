@@ -64,6 +64,7 @@ class Router
         else if (isset($get["route"]) && $get["route"] === "admin-check-connexion") 
         {
             $this->adc->checkLogin();
+            
         } 
         else if (isset($get["route"]) && $get["route"] === "admin-create-user") 
         {
